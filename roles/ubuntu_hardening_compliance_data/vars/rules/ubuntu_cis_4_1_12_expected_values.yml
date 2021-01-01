@@ -1,4 +1,4 @@
 ---
 # TODO: Configure according to site policy.
 # Partitions should be separated by spaces
-redhat_8_cis_4_1_12_partions_expected_value: "/usr/lib/polkit-1/polkit-agent-helper-1 /sbin/unix_chkpwd"
+ubuntu_cis_4_1_12_partions_expected_value: "/usr/lib/polkit-1/polkit-agent-helper-1 /sbin/unix_chkpwd"

@@ -4,11 +4,11 @@
 # This is configured based on the client's risk register
 # Contains a list of exceptions to rules
 # First level key - hostname
-# Second level key - baseline from dict "redhat_8_hardening_compliance_baseline_data"
+# Second level key - baseline from dict "ubuntu_hardening_compliance_baseline_data"
 
 # TODO: Configure according to site policy. Entries added are examples only
-redhat_8_risk_register:
-  REDHAT7-3:
+ubuntu_risk_register:
+  Ubuntu-3:
     baseline_1_1_1_8:
       accepted_values:
         - "insmod /lib/modules/3.10.0-957.12.2.el7.x86_64/kernel/fs/fat/fat.ko.xz insmod /lib/modules/3.10.0-957.12.2.el7.x86_64/kernel/fs/fat/vfat.ko.xz"
@@ -172,7 +172,7 @@ redhat_8_risk_register:
         - ""
       date_approved: 2019-03-14
       approved_by: Rodel Paco
-  REDHAT7-2:
+  Ubuntu-2:
     baseline_1_1_1_8:
       accepted_values:
         - |-

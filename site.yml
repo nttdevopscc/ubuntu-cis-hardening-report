@@ -1,6 +1,6 @@
 ---
 
-- name: Get compliance data from Redhat 7 managed nodes
+- name: Get compliance data from Ubuntu managed nodes
   hosts: ubuntu_servers
   gather_facts: true
   strategy: free
@@ -10,7 +10,7 @@
   roles:
     - ubuntu_hardening_compliance_data
 
-- name: Check compliance of Redhat 8 managed nodes
+- name: Check compliance of Ubuntu managed nodes
   hosts: ubuntu_servers
   gather_facts: true
   ignore_errors: true
@@ -19,7 +19,7 @@
   roles:
     - ubuntu_hardening_compliance_audit
 
-- name: Generate Redhat 7 hardening compliance report
+- name: Generate Ubuntu hardening compliance report
   hosts: ubuntu_servers
   gather_facts: true
   ignore_errors: true

@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - redhat_8_hardening_compliance_report
+    - ubuntu_hardening_compliance_report

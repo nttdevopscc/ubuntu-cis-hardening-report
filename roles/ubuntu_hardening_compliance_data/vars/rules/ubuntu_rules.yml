@@ -3,7 +3,7 @@
 ###################
 # compliance - NC (Non-Compliant), C (Compliant), or RA (Risk Accepted)
 
-redhat_8_rules:
+ubuntu_rules:
 
 # CIS
   cis_1_1_1_1:

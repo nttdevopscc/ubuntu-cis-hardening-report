@@ -1,5 +1,5 @@
 ---
 # TODO: Configure according to site policy.
-redhat_8_cis_5_3_2_expected_values:
+ubuntu_cis_5_3_2_expected_values:
   - "auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900"
   - "account required pam_tally2.so"
