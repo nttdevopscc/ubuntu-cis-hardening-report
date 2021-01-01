@@ -79,14 +79,14 @@
   ignore_errors: true
   when: ubuntu_cis_1_1_1_4 | bool
 
-- name: 1.1.1.5
-  block:
-    - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
+# - name: 1.1.1.5
+#   block:
+#     - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
 
-- name: 1.1.1.6
-  block:
-    - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled
+# - name: 1.1.1.6
+#   block:
+#     - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled
 
-- name: 1.1.1.7
-  block:
-    - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited
+# - name: 1.1.1.7
+#   block:
+#     - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited

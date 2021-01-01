@@ -23,14 +23,14 @@
 #   block:
 #     - name: 4.2.1.6 Ensure remote rsyslog messages are only accepted on designated log   
 
-- name: 4.2.2.1
-  block:
-    - name: 4.2.2.1 Ensure journald is configured to send logs to rsyslog
+# - name: 4.2.2.1
+#   block:
+#     - name: 4.2.2.1 Ensure journald is configured to send logs to rsyslog
 
-- name: 4.2.2.2
-  block:
-    - name: 4.2.2.2 Ensure journald is configured to compress large log files
+# - name: 4.2.2.2
+#   block:
+#     - name: 4.2.2.2 Ensure journald is configured to compress large log files
 
-- name: 4.2.2.3
-  block:
-    - name: 4.2.2.3 Ensure journald is configured to write logfiles are configured
+# - name: 4.2.2.3
+#   block:
+#     - name: 4.2.2.3 Ensure journald is configured to write logfiles are configured

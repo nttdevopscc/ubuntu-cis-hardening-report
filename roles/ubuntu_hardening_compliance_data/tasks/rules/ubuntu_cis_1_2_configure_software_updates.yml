@@ -1,5 +1,4 @@
 ---
-
 # - name: 1.2.1
 #   block:
 #     - name: 1.2.1 Ensure GPG keys are configured

@@ -191,10 +191,10 @@
   ignore_errors: true
   when: ubuntu_cis_6_1_12 | bool
 
-- name: 6.1.13
-  block:
-    - name: 6.1.13 Audit SUID executables
+# - name: 6.1.13
+#   block:
+#     - name: 6.1.13 Audit SUID executables
 
-- name: 6.1.14
-  block:
-    - name: 6.1.14 Audit SGID executables    
+# - name: 6.1.14
+#   block:
+#     - name: 6.1.14 Audit SGID executables    

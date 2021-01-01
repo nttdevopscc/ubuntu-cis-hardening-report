@@ -1,6 +1,4 @@
 ---
-
-
 - name: 1.5.1
   block:
     - name: 1.5.1 Ensure bootloader password is set

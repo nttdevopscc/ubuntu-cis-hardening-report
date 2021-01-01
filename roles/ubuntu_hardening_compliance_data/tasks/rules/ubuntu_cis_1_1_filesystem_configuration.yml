@@ -1,5 +1,4 @@
 ---
-
 # - name: 1.1.2
 #   block:
 #     - name: 1.1.2 Ensure /tmp is configured

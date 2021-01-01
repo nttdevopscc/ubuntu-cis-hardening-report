@@ -135,6 +135,6 @@
   ignore_errors: true
   when: ubuntu_cis_5_1_8 | bool
 
-- name: 5.1.9
-  block:
-    - name: 5.1.9 Ensure at is restricted to authorized users
+# - name: 5.1.9
+#   block:
+#     - name: 5.1.9 Ensure at is restricted to authorized users
