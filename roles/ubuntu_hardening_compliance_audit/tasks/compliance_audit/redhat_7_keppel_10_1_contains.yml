@@ -1,0 +1,49 @@
+---
+# Compliance audit - ubuntu_keppel_10_1_contains #
+###################################################
+# ubuntu_rule_key - key of the rule
+# ubuntu_baseline_key - key of the baseline being checked
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Display current value of variables
+  debug:
+    msg: |-
+      ubuntu_rule_key: {{ ubuntu_rule_key }}
+      ubuntu_baseline_key: {{ ubuntu_baseline_key }}
+    verbosity: 2
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Set values for count variable
+  set_fact:
+    ubuntu_audit_match_count: 0
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Check configuration
+  set_fact:
+    ubuntu_audit_match_count: "{{ ubuntu_audit_match_count  | default(0) | int + 1 }}"
+  when:
+    - ubuntu_rules[ubuntu_rule_key]['actual_values'][0] is defined
+    - ubuntu_rules[ubuntu_rule_key]['expected_values'][0] is defined
+    - ubuntu_rules[ubuntu_rule_key]['actual_values'][0] | regex(ubuntu_rules[ubuntu_rule_key]['expected_values'][0])
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Check configuration per user
+  set_fact:
+    ubuntu_audit_match_count: "{{ ubuntu_audit_match_count  | default(0) | int + 1 }}"
+  when:
+    - ubuntu_rules[ubuntu_rule_key]['actual_values'][1] is defined
+    - ubuntu_rules[ubuntu_rule_key]['expected_values'][1] is defined
+    - user_configuration_item | regex(ubuntu_rules[ubuntu_rule_key]['expected_values'][1])
+  loop: "{{ ubuntu_rules[ubuntu_rule_key]['actual_values'][1] }}"
+  loop_control:
+    loop_var: user_configuration_item
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Mark as compliant
+  set_fact:
+    ubuntu_hardening_compliance_baseline_data: "{{ ubuntu_hardening_compliance_baseline_data | combine({ubuntu_baseline_key: {'compliance': 'C' }}, recursive=true) }}"
+  when:
+    - ubuntu_rules[ubuntu_rule_key]['actual_values'][1] is defined
+    - ubuntu_audit_match_count | int == (ubuntu_rules[ubuntu_rule_key]['actual_values'][1] | length + 1)
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Display compliance
+  debug:
+    msg: |-
+      Number of actual values and expected values matches: {{ ubuntu_audit_match_count }}
+      Compliance: {{ ubuntu_hardening_compliance_baseline_data[ubuntu_baseline_key]['compliance'] }}
+    verbosity: 2

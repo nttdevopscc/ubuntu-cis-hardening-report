@@ -1,0 +1,19 @@
+---
+redhat_8_cis_1_7_1_2_expected_value: |-
+  *********************************************************************
+  *                            Restricted System - NO Unauthorized Access                                        *
+  *********************************************************************
+
+                WARNING:  UNAUTHORIZED PERSONS DO NOT PROCEED!
+
+      This equipment is  operated  by  "{{ business_unit }}" and may be accessed only by
+      authorized users.  Access and use of this  equipment  by  anyone
+      without the permission of, or other than as permitted by "{{ business_unit }}" is
+      strictly prohibited by "{{ business_unit }}" rules and by state and federal  laws,
+      and may subject the unauthorized user, including  employees  not
+      having authorization, to criminal and civil penalties as well as
+      Company-initiated disciplinary proceedings.
+
+              WARNING:  UNAUTHORIZED PERSONS DO NOT PROCEED!
+
+  **********************************************************************

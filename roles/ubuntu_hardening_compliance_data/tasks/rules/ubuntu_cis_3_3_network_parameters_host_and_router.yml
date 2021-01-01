@@ -1,0 +1,184 @@
+---
+- name: 3.3.1
+  block:
+    - name: 3.3.1 Ensure source routed packets are not accepted
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.conf.all.accept_source_route | sed -e 's/ //g'
+        - sysctl net.ipv4.conf.default.accept_source_route | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.all\.accept_source_route" /etc/sysctl.conf | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.default\.accept_source_route" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_1_out
+
+    - name: 3.3.1 Ensure source routed packets are not accepted | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_1"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.conf.all.accept_source_route=0
+          - net.ipv4.conf.default.accept_source_route=0
+          - net.ipv4.conf.all.accept_source_route=0
+          - net.ipv4.conf.default.accept_source_route=0
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_1_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_1 | bool
+
+- name: 3.3.2
+  block:
+    - name: 3.3.2 Ensure ICMP redirects are not accepted
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.conf.all.accept_redirects | sed -e 's/ //g'
+        - sysctl net.ipv4.conf.default.accept_redirects | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.all\.accept_redirects" /etc/sysctl.conf | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.default\.accept_redirects" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_2_out
+
+    - name: 3.3.2 Ensure ICMP redirects are not accepted | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_2"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.conf.all.accept_redirects=0
+          - net.ipv4.conf.default.accept_redirects=0
+          - net.ipv4.conf.all.accept_redirects=0
+          - net.ipv4.conf.default.accept_redirects=0
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_2_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_2 | bool
+
+- name: 3.3.3
+  block:
+    - name: 3.3.3 Ensure secure ICMP redirects are not accepted
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.conf.all.secure_redirects | sed -e 's/ //g'
+        - sysctl net.ipv4.conf.default.secure_redirects | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.all\.secure_redirects" /etc/sysctl.conf | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.default\.secure_redirects" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_3_out
+
+    - name: 3.3.3 Ensure secure ICMP redirects are not accepted | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_3"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.conf.all.secure_redirects=0
+          - net.ipv4.conf.default.secure_redirects=0
+          - net.ipv4.conf.all.secure_redirects=0
+          - net.ipv4.conf.default.secure_redirects=0
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_3_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_3 | bool
+
+- name: 3.3.4
+  block:
+    - name: 3.3.4 Ensure suspicious packets are logged
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.conf.all.log_martians | sed -e 's/ //g'
+        - sysctl net.ipv4.conf.default.log_martians | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.all\.log_martians" /etc/sysctl.conf | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.default\.log_martians" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_4_out
+
+    - name: 3.3.4 Ensure suspicious packets are logged | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_4"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.conf.all.log_martians=1
+          - net.ipv4.conf.default.log_martians=1
+          - net.ipv4.conf.all.log_martians=1
+          - net.ipv4.conf.default.log_martians=1 
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_4_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_4 | bool
+
+- name: 3.3.5
+  block:
+    - name: 3.3.5 Ensure broadcast ICMP requests are ignored
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.icmp_echo_ignore_broadcasts | sed -e 's/ //g'
+        - grep "net\.ipv4\.icmp_echo_ignore_broadcasts" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_5_out
+
+    - name: 3.3.5 Ensure broadcast ICMP requests are ignored | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_5"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.icmp_echo_ignore_broadcasts=1
+          - net.ipv4.icmp_echo_ignore_broadcasts=1 
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_5_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_5 | bool
+
+- name: 3.3.6
+  block:
+    - name: 3.3.6 Ensure bogus ICMP responses are ignored
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.icmp_ignore_bogus_error_responses | sed -e 's/ //g'
+        - grep "net\.ipv4\.icmp_ignore_bogus_error_responses" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_6_out
+
+    - name: 3.3.6 Ensure bogus ICMP responses are ignored | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_6"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.icmp_ignore_bogus_error_responses=1
+          - net.ipv4.icmp_ignore_bogus_error_responses=1 
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_6_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_6 | bool
+
+- name: 3.3.7
+  block:
+    - name: 3.3.7 Ensure Reverse Path Filtering is enabled
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.conf.all.rp_filter | sed -e 's/ //g'
+        - sysctl net.ipv4.conf.default.rp_filter | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.all\.rp_filter" /etc/sysctl.conf | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.default\.rp_filter" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_7_out
+
+    - name: 3.3.7 Ensure Reverse Path Filtering is enabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_7"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.conf.all.rp_filter=1
+          - net.ipv4.conf.default.rp_filter=1
+          - net.ipv4.conf.all.rp_filter=1
+          - net.ipv4.conf.default.rp_filter=1
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_7_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_7 | bool
+
+- name: 3.3.8
+  block:
+    - name: 3.3.8 Ensure TCP SYN Cookies is enabled
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.tcp_syncookies | sed -e 's/ //g'
+        - grep "net\.ipv4\.tcp_syncookies" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_3_8_out
+
+    - name: 3.3.8 Ensure TCP SYN Cookies is enabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_3_8"
+        ubuntu_cis_rule_expected_values:
+          - net.ipv4.tcp_syncookies=1
+          - net.ipv4.tcp_syncookies=1
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_3_8_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_3_8 | bool
+
+# - name: 3.3.9
+#   block:
+#     - name: 3.3.9 Ensure IPv6 router advertisements are not accepted

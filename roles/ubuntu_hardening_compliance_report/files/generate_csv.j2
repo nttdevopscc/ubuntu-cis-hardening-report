@@ -1,0 +1,15 @@
+Server Name,IP Address,Environment,Application,Compliant Status
+{% for host in groups[group_name] -%}
+{% if hostvars[host]['ubuntu_hardening_compliance_summary'] is defined %}
+{% set nc_status = [] %}
+{% for summary_item in hostvars[host]['ubuntu_hardening_compliance_summary'] %}
+{% for value in summary_item['non_compliant'] %}
+{% if value|int == 1 %}
+{% if nc_status.append(1) %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{{ host }},{{ hostvars[host]['ansible_default_ipv4']['address'] }},{{ hostvars[host]['device_environment'] }},{{ hostvars[host]['application'] }},{% if nc_status|length > 0 %}NC{% else %}C{% endif %}{{ "\n" }}
+{%- endfor %}

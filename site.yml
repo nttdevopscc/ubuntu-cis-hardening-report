@@ -1,0 +1,28 @@
+---
+
+- name: Get compliance data from Redhat 7 managed nodes
+  hosts: ubuntu_servers
+  gather_facts: true
+  strategy: free
+  ignore_errors: true
+  ignore_unreachable: true
+  become: yes
+  roles:
+    - ubuntu_hardening_compliance_data
+
+- name: Check compliance of Redhat 8 managed nodes
+  hosts: ubuntu_servers
+  gather_facts: true
+  ignore_errors: true
+  ignore_unreachable: true
+  become: yes
+  roles:
+    - ubuntu_hardening_compliance_audit
+
+- name: Generate Redhat 7 hardening compliance report
+  hosts: ubuntu_servers
+  gather_facts: true
+  ignore_errors: true
+  ignore_unreachable: true
+  roles:
+    - ubuntu_hardening_compliance_report

@@ -1,0 +1,65 @@
+---
+- name: 5.4.2
+  block:
+    - name: 5.4.2 Ensure system accounts are secured
+
+- name: 5.4.3
+  block:
+    - name: 5.4.3 Ensure default group for the root account is GID 0
+      shell: >-
+        grep "^root:" /etc/passwd | cut -f4 -d:
+      register: ubuntu_cis_5_4_3_out
+
+    - name: 5.4.3 Ensure default group for the root account is GID 0 | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_4_3"
+        ubuntu_cis_rule_expected_values:
+          - "0"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_4_3_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_4_3 | bool
+
+- name: 5.4.4
+  block:
+    - name: 5.4.4 Ensure default user umask is 027 or more restrictive
+      shell: "{{ item }}"
+      loop:
+        - grep -w "umask 027" /etc/bashrc
+        - grep -wh "umask 027" /etc/profile /etc/profile.d/*.sh
+      register: ubuntu_cis_5_4_4_out
+
+    - name: 5.4.4 Ensure default user umask is 027 or more restrictive | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_4_4"
+        ubuntu_cis_rule_expected_values:
+          - "umask 027"
+          - "umask 027"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_4_4_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_4_4 | bool
+
+# - name: 5.4.5
+#   block:
+#     - name: 5.4.5 Ensure default user shell timeout is 900 seconds or less
+
+# - name: 5.5
+#   block:
+#     - name: 5.5 Ensure root login is restricted to system console 
+
+- name: 5.6
+  block:
+    - name: 5.6 Ensure access to the su command is restricted
+      shell: grep pam_wheel.so /etc/pam.d/su | grep -v ^#
+      register: ubuntu_cis_5_6_out
+
+    - name: 5.6 Ensure access to the su command is restricted | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_6"
+        ubuntu_cis_rule_expected_values:
+          - "auth           required        pam_wheel.so use_uid"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_6_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_6 | bool

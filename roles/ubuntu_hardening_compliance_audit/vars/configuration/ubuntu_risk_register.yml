@@ -1,0 +1,213 @@
+---
+# Risk Register #
+#################
+# This is configured based on the client's risk register
+# Contains a list of exceptions to rules
+# First level key - hostname
+# Second level key - baseline from dict "redhat_8_hardening_compliance_baseline_data"
+
+# TODO: Configure according to site policy. Entries added are examples only
+redhat_8_risk_register:
+  REDHAT7-3:
+    baseline_1_1_1_8:
+      accepted_values:
+        - "insmod /lib/modules/3.10.0-957.12.2.el7.x86_64/kernel/fs/fat/fat.ko.xz insmod /lib/modules/3.10.0-957.12.2.el7.x86_64/kernel/fs/fat/vfat.ko.xz"
+        - ""
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_1_4_2:
+      accepted_values:
+        - ""
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_1_7_2:
+      accepted_values:
+        - "cat: /etc/dconf/profile/gdm: No such file or directory"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_2_1_7:
+      accepted_values:
+        - "Failed to get unit file state for xinetd.service: No such file or directory"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_2_2_2:
+      accepted_values:
+        - "xorg-x11-font-utils xorg-x11-xkb-utils xorg-x11-xauth xorg-x11-server-Xorg xorg-x11-drv-vmmouse xorg-x11-drv-wacom xorg-x11-drv-vmware xorg-x11-drv-libinput xorg-x11-server-Xephyr xorg-x11-fonts-ethiopic xorg-x11-fonts-ISO8859-2-100dpi xorg-x11-fonts-ISO8859-14-100dpi xorg-x11-fonts-75dpi xorg-x11-xbitmaps xorg-x11-server-common xorg-x11-drv-fbdev xorg-x11-drv-qxl xorg-x11-drv-evdev xorg-x11-drv-v4l xorg-x11-drv-intel xorg-x11-drv-synaptics xorg-x11-drv-void xorg-x11-drivers xorg-x11-drv-openchrome xorg-x11-drv-mouse xorg-x11-apps xorg-x11-xinit xorg-x11-fonts-misc xorg-x11-fonts-ISO8859-9-100dpi xorg-x11-fonts-ISO8859-14-75dpi xorg-x11-fonts-ISO8859-15-75dpi xorg-x11-fonts-cyrillic xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-9-75dpi xorg-x11-docs xorg-x11-proto-devel xorg-x11-server-utils xorg-x11-drv-vesa xorg-x11-drv-ati xorg-x11-drv-dummy xorg-x11-drv-nouveau xorg-x11-drv-keyboard xorg-x11-utils xorg-x11-fonts-Type1 xorg-x11-fonts-100dpi xorg-x11-fonts-ISO8859-2-75dpi xorg-x11-fonts-ISO8859-1-100dpi"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_2_2_7:
+      accepted_values:
+        - "Failed to get unit file state for nfs.service: No such file or directory"
+        - "Failed to get unit file state for nfs-server.service: No such file or directory"
+        - "Failed to get unit file state for rpcbind.service: No such file or directory"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_2_2_19:
+      accepted_values:
+        - "Failed to get unit file state for telnet.service: No such file or directory"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_2_3_5:
+      accepted_values:
+        - "package openldap-clients is not installed"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_3_3_3:
+      accepted_values:
+        - ""
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_3_4_3:
+      accepted_values:
+        - ""
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_3_4_5:
+      accepted_values:
+        - "644 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_2:
+      accepted_values:
+        - "600 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_3:
+      accepted_values:
+        - "700 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_4:
+      accepted_values:
+        - "700 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_5:
+      accepted_values:
+        - "700 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_6:
+      accepted_values:
+        - "700 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_7:
+      accepted_values:
+        - "700 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_1_8:
+      accepted_values:
+        - "stat: cannot stat ‘/etc/cron.deny’: No such file or directory"
+        - "stat: cannot stat ‘/etc/at.deny’: No such file or directory"
+        - "600 root root"
+        - "600 root root"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_2:
+      accepted_values:
+        - "Protocol 2"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_3:
+      accepted_values:
+        - "LogLevel INFO"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_4:
+      accepted_values:
+        - "X11Forwarding no"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_5:
+      accepted_values:
+        - "MaxAuthTries 4"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_6:
+      accepted_values:
+        - "IgnoreRhosts yes"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_7:
+      accepted_values:
+        - "HostbasedAuthentication no"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_8:
+      accepted_values:
+        - "PermitRootLogin yes"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_9:
+      accepted_values:
+        - "PermitEmptyPasswords no"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_10:
+      accepted_values:
+        - "PermitUserEnvironment no"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_11:
+      accepted_values:
+        - "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_12:
+      accepted_values:
+        - "ClientAliveInterval 300"
+        - "ClientAliveCountMax 3"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_13:
+      accepted_values:
+        - "LoginGraceTime 60"
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+    baseline_5_2_14:
+      accepted_values:
+        - ""
+        - ""
+      date_approved: 2019-03-14
+      approved_by: Rodel Paco
+  REDHAT7-2:
+    baseline_1_1_1_8:
+      accepted_values:
+        - |-
+          insmod /lib/modules/3.10.0-957.12.2.el7.x86_64/kernel/fs/fat/fat.ko.xz insmod /lib/modules/3.10.0-957.12.2.el7.x86_64/kernel/fs/fat/vfat.ko.xz
+        - ""
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco
+    baseline_1_4_2:
+      accepted_values:
+        - ""
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco
+    baseline_1_7_2:
+      accepted_values:
+        - "cat: /etc/dconf/profile/gdm: No such file or directory"
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco
+    baseline_3_3_3:
+      accepted_values:
+        - ""
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco
+    baseline_3_4_3:
+      accepted_values:
+        - ""
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco
+    baseline_5_2_8:
+      accepted_values:
+        - "PermitRootLogin yes"
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco
+    baseline_5_2_14:
+      accepted_values:
+        - ""
+        - ""
+      date_approved: 2020-03-11
+      approved_by: Rodel Paco

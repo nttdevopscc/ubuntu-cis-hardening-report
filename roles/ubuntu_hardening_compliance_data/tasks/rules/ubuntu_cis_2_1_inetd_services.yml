@@ -1,0 +1,8 @@
+---
+# - name: 2.1.1
+#   block:
+#     - name: 2.1.1 Ensure xinetd is not installed
+
+# - name: 2.1.2
+#   block:
+#     - name: 2.1.2 Ensure openbsd-inetd is not installed

@@ -1,0 +1,50 @@
+---
+# - name: 1.6.1
+#   block:
+#     - name: 1.6.1 Ensure XD/NX support is enabled
+
+- name: 1.6.2
+  block:
+    - name: 1.6.2 Ensure address space layout randomization (ASLR) is enabled
+      shell: "{{ item }}"
+      loop:
+        - sysctl kernel.randomize_va_space  | sed -e 's/ //g'
+        - grep "kernel\.randomize_va_space" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_1_6_2_out
+
+    - name: 1.6.3 Ensure address space layout randomization (ASLR) is enabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_6_2"
+        ubuntu_cis_rule_expected_values:
+          - kernel.randomize_va_space=2
+          - kernel.randomize_va_space=2
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_6_2_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_6_2 | bool
+
+# - name: 1.6.3
+#   block:
+#     - name: 1.6.3 Ensure prelink is disbaled
+
+- name: 1.6.4
+  block:
+    - name: 1.6.4 Ensure core dumps are restricted
+      shell: "{{ item }}"
+      loop:
+        - egrep "*\s+hard\s+core\s+0" /etc/security/limits.conf | awk '{$2=$2};1'
+        - sysctl fs.suid_dumpable | sed -e 's/ //g'
+        - grep "fs\.suid_dumpable" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_1_6_4_out
+
+    - name: 1.6.4 Ensure core dumps are restricted | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_6_4"
+        ubuntu_cis_rule_expected_values:
+          - "* hard core 0"
+          - "fs.suid_dumpable=0"
+          - "fs.suid_dumpable=0"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_6_4_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_6_4 | bool

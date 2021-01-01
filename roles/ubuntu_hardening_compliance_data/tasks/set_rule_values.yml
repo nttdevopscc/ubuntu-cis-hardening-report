@@ -1,0 +1,36 @@
+---
+# Set rule values #
+###################
+# ubuntu_cis_rule_key - key of the rule
+# ubuntu_cis_rule_expected_values: list of expected values for the rule
+# ubuntu_cis_rule_output - results of running the audit commands
+
+#- name: Set Rule Values | {{ ubuntu_cis_rule_key }} | Display current value of variables
+#  debug:
+#    msg: |-
+#      ubuntu_cis_rule_key: {{ ubuntu_cis_rule_key }}
+#      ubuntu_cis_rule_expected_values: {{ ubuntu_cis_rule_expected_values }}
+#      ubuntu_cis_rule_output: {{ ubuntu_cis_rule_output }}
+#   verbosity: 2
+
+- name: Set Rule Values | {{ ubuntu_cis_rule_key }} | Set expected values
+  set_fact:
+    ubuntu_rules: "{{ ubuntu_rules | combine({ubuntu_cis_rule_key: {'expected_values': ubuntu_cis_rule_expected_values}}, recursive=true) }}"
+
+- name: Set Rule Values | {{ ubuntu_cis_rule_key }} | Set actual values using results
+  set_fact:
+    ubuntu_rules: "{{ ubuntu_rules | combine({ubuntu_cis_rule_key: {'actual_values':  ubuntu_rules[ubuntu_cis_rule_key]['actual_values'] + [item['stderr'] if item['stderr']|length and item['rc']|int == 1 else item['stdout'] | trim] }}, recursive=true) }}"
+  loop: "{{ ubuntu_cis_rule_output['results'] }}"
+  when: ubuntu_cis_rule_output['results'] is defined
+
+- name: Set Rule Values | {{ ubuntu_cis_rule_key }} | Set actual value
+  set_fact:
+    ubuntu_rules: "{{ ubuntu_rules | combine({ubuntu_cis_rule_key: {'actual_values':  ubuntu_rules[ubuntu_cis_rule_key]['actual_values'] + [ubuntu_cis_rule_output['stderr'] if ubuntu_cis_rule_output['stderr']|length and ubuntu_cis_rule_output['rc']|int == 1 else ubuntu_cis_rule_output['stdout'] | trim] }}, recursive=true) }}"
+  when: ubuntu_cis_rule_output['results'] is not defined
+
+#- name: Set Rule Values | {{ ubuntu_cis_rule_key }} | Display rule values
+#  debug:
+#    msg: |-
+#      ubuntu_rules[{{ ubuntu_cis_rule_key }}]['expected_values']: {{ ubuntu_rules[ubuntu_cis_rule_key]['expected_values'] }}
+#      ubuntu_rules[{{ ubuntu_cis_rule_key }}]['actual_values']: {{ ubuntu_rules[ubuntu_cis_rule_key]['actual_values'] }}
+#    verbosity: 2

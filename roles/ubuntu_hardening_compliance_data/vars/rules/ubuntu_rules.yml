@@ -1,0 +1,988 @@
+---
+# Rules #
+###################
+# compliance - NC (Non-Compliant), C (Compliant), or RA (Risk Accepted)
+
+redhat_8_rules:
+
+# CIS
+  cis_1_1_1_1:
+    rule: "1.1.1.1"
+    description: "Ensure mounting of cramfs filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_2:
+    rule: "1.1.1.2"
+    description: "Ensure mounting of freevxfs filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_3:
+    rule: "1.1.1.3"
+    description: "Ensure mounting of jffs2 filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_4:
+    rule: "1.1.1.4"
+    description: "Ensure mounting of hfs filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_5:
+    rule: "1.1.1.5"
+    description: "Ensure mounting of hfsplus filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_6:
+    rule: "1.1.1.6"
+    description: "Ensure mounting of squashfs filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_7:
+    rule: "1.1.1.7"
+    description: "Ensure mounting of udf filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_1_8:
+    rule: "1.1.1.8"
+    description: "Ensure mounting of fat filesystems is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_1_3:
+    rule: "1.1.3"
+    description: "Ensure nodev option set on /tmp partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_4:
+    rule: "1.1.4"
+    description: "Ensure nosuid option set on /tmp partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_5:
+    rule: "1.1.5"
+    description: "Ensure noexec option set on /tmp partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_8:
+    rule: "1.1.8"
+    description: "Ensure nodev option set on /var/tmp partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_9:
+    rule: "1.1.9"
+    description: "Ensure nosuid option set on /var/tmp partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_10:
+    rule: "1.1.10"
+    description: "Ensure noexec option set on /var/tmp partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_14:
+    rule: "1.1.14"
+    description: "Ensure nodev option set on /home partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_15:
+    rule: "1.1.15"
+    description: "Ensure nodev option set on /dev/shm partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_16:
+    rule: "1.1.16"
+    description: "Ensure nosuid option set on /dev/shm partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_17:
+    rule: "1.1.17"
+    description: "Ensure noexec option set on /dev/shm partition"
+    expected_values: []
+    actual_values: []
+  cis_1_1_21:
+    rule: "1.1.21"
+    description: "Ensure sticky bit is set on all world-writable directories"
+    expected_values: []
+    actual_values: []
+  cis_1_1_22:
+    rule: "1.1.22"
+    description: "Disable Automounting"
+    expected_values: []
+    actual_values: []
+  cis_1_2_2:
+    rule: "1.2.2"
+    description: "Ensure gpgcheck is globally activated"
+    expected_values: []
+    actual_values: []
+  cis_1_3_1:
+    rule: "1.3.1"
+    description: "Ensure AIDE is installed"
+    expected_values: []
+    actual_values: []
+  cis_1_3_2:
+    rule: "1.3.2"
+    description: "Ensure filesystem integrity is regularly checked"
+    expected_values: []
+    actual_values: []
+  cis_1_4_1:
+    rule: "1.4.1"
+    description: "Ensure permissions on bootloader config are configured"
+    expected_values: []
+    actual_values: []
+  cis_1_4_2:
+    rule: "1.4.2"
+    description: "Ensure permissions on bootloader config are configured"
+    expected_values: []
+    actual_values: []
+  cis_1_4_3:
+    rule: "1.4.3"
+    description: "Ensure authentication required for single user mode"
+    expected_values: []
+    actual_values: []
+  cis_1_5_1:
+    rule: "1.5.1"
+    description: "Ensure core dumps are restricted"
+    expected_values: []
+    actual_values: []
+  cis_1_5_2:
+    rule: "1.5.2"
+    description: "Ensure XD/NX support is enabled"
+    expected_values: []
+    actual_values: []
+  cis_1_5_3:
+    rule: "1.5.3"
+    description: "Ensure address space layout randomization (ASLR) is enabled"
+    expected_values: []
+    actual_values: []
+  cis_1_5_4:
+    rule: "1.5.4"
+    description: "Ensure prelink is disabled"
+    expected_values: []
+    actual_values: []
+  cis_1_7_1_1:
+    rule: "1.7.1.1"
+    description: "Ensure message of the day is configured properly"
+    expected_values: []
+    actual_values: []
+  cis_1_7_1_2:
+    rule: "1.7.1.2"
+    description: "Ensure local login warning banner is configured properly"
+    expected_values: []
+    actual_values: []
+  cis_1_7_1_3:
+    rule: "1.7.1.3"
+    description: "Ensure remote login warning banner is configured properly"
+    expected_values: []
+    actual_values: []
+  cis_1_7_1_4:
+    rule: "1.7.1.4"
+    description: "Ensure permissions on /etc/motd are configured"
+    expected_values: []
+    actual_values: []
+  cis_1_7_1_5:
+    rule: "1.7.1.5"
+    description: "Ensure permissions on /etc/issue are configured"
+    expected_values: []
+    actual_values: []
+  cis_1_7_1_6:
+    rule: "1.7.1.6"
+    description: "Ensure permissions on /etc/issue.net are configured"
+    expected_values: []
+    actual_values: []
+  cis_1_7_2:
+    rule: "1.7.2"
+    description: "Ensure GDM login banner is configured"
+    expected_values: []
+    actual_values: []
+  cis_2_1_1:
+    rule: "2.1.1"
+    description: "Ensure chargen services are not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_1_2:
+    rule: "2.1.2"
+    description: "Ensure daytime services are not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_1_3:
+    rule: "2.1.3"
+    description: "Ensure discard services are not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_1_4:
+    rule: "2.1.4"
+    description: "Ensure echo services are not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_1_5:
+    rule: "2.1.5"
+    description: "Ensure time services are not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_1_6:
+    rule: "2.1.6"
+    description: "Ensure tftp server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_1_7:
+    rule: "2.1.7"
+    description: "Ensure xinetd is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_1_1:
+    rule: "2.2.1.1"
+    description: "Ensure time synchronization is in use"
+    expected_values: []
+    actual_values: []
+  cis_2_2_1_2:
+    rule: "2.2.1.2"
+    description: "Ensure ntp is configured"
+    expected_values: []
+    actual_values: []
+  cis_2_2_1_3:
+    rule: "2.2.1.3"
+    description: "Ensure chrony is configured"
+    expected_values: []
+    actual_values: []
+  cis_2_2_2:
+    rule: "2.2.2"
+    description: "Ensure X Window System is not installed"
+    expected_values: []
+    actual_values: []
+  cis_2_2_3:
+    rule: "2.2.3"
+    description: "Ensure Avahi Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_4:
+    rule: "2.2.4"
+    description: "Ensure CUPS is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_5:
+    rule: "2.2.5"
+    description: "Ensure DHCP Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_6:
+    rule: "2.2.6"
+    description: "Ensure LDAP server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_7:
+    rule: "2.2.7"
+    description: "Ensure NFS and RPC are not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_8:
+    rule: "2.2.8"
+    description: "Ensure DNS Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_9:
+    rule: "2.2.9"
+    description: "Ensure FTP Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_10:
+    rule: "2.2.10"
+    description: "Ensure HTTP server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_11:
+    rule: "2.2.11"
+    description: "Ensure IMAP and POP3 server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_12:
+    rule: "2.2.12"
+    description: "Ensure Samba is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_13:
+    rule: "2.2.13"
+    description: "Ensure HTTP Proxy Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_14:
+    rule: "2.2.14"
+    description: "Ensure SNMP Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_15:
+    rule: "2.2.15"
+    description: "Ensure mail transfer agent is configured for local-only mode"
+    expected_values: []
+    actual_values: []
+  cis_2_2_16:
+    rule: "2.2.16"
+    description: "Ensure NIS Server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_17:
+    rule: "2.2.17"
+    description: "Ensure rsh server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_18:
+    rule: "2.2.18"
+    description: "Ensure talk server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_19:
+    rule: "2.2.19"
+    description: "Ensure telnet server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_20:
+    rule: "2.2.20"
+    description: "Ensure tftp server is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_2_21:
+    rule: "2.2.21"
+    description: "Ensure rsync service is not enabled"
+    expected_values: []
+    actual_values: []
+  cis_2_3_1:
+    rule: "2.3.1"
+    description: "Ensure NIS Client is not installed"
+    expected_values: []
+    actual_values: []
+  cis_2_3_2:
+    rule: "2.3.2"
+    description: "Ensure rsh client is not installed"
+    expected_values: []
+    actual_values: []
+  cis_2_3_3:
+    rule: "2.3.3"
+    description: "Ensure talk client is not installed"
+    expected_values: []
+    actual_values: []
+  cis_2_3_4:
+    rule: "2.3.4"
+    description: "Ensure telnet client is not installed"
+    expected_values: []
+    actual_values: []
+  cis_2_3_5:
+    rule: "2.3.5"
+    description: "Ensure LDAP client is not installed"
+    expected_values: []
+    actual_values: []
+  cis_3_1_1:
+    rule: "3.1.1"
+    description: "Ensure IP forwarding is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_1_2:
+    rule: "3.1.2"
+    description: "Ensure packet redirect sending is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_2_1:
+    rule: "3.2.1"
+    description: "Ensure source routed packets are not accepted"
+    expected_values: []
+    actual_values: []
+  cis_3_2_2:
+    rule: "3.2.2"
+    description: "Ensure ICMP redirects are not accepted"
+    expected_values: []
+    actual_values: []
+  cis_3_2_3:
+    rule: "3.2.3"
+    description: "Ensure secure ICMP redirects are not accepted"
+    expected_values: []
+    actual_values: []
+  cis_3_2_4:
+    rule: "3.2.4"
+    description: "Ensure suspicious packets are logged"
+    expected_values: []
+    actual_values: []
+  cis_3_2_5:
+    rule: "3.2.5"
+    description: "Ensure broadcast ICMP requests are ignored"
+    expected_values: []
+    actual_values: []
+  cis_3_2_6:
+    rule: "3.2.6"
+    description: "Ensure bogus ICMP responses are ignored"
+    expected_values: []
+    actual_values: []
+  cis_3_2_7:
+    rule: "3.2.7"
+    description: "Ensure Reverse Path Filtering is enabled"
+    expected_values: []
+    actual_values: []
+  cis_3_2_8:
+    rule: "3.2.8"
+    description: "Ensure TCP SYN Cookies is enabled"
+    expected_values: []
+    actual_values: []
+  cis_3_3_1:
+    rule: "3.3.1"
+    description: "Ensure IPv6 router advertisements are not accepted"
+    expected_values: []
+    actual_values: []
+  cis_3_3_2:
+    rule: "3.3.2"
+    description: "Ensure IPv6 redirects are not accepted"
+    expected_values: []
+    actual_values: []
+  cis_3_3_3:
+    rule: "3.3.3"
+    description: "Ensure IPv6 is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_4_1:
+    rule: "3.4.1"
+    description: "Ensure TCP Wrappers is installed"
+    expected_values: []
+    actual_values: []
+  cis_3_4_2:
+    rule: "3.4.2"
+    description: "Ensure /etc/hosts.allow is configured"
+    expected_values: []
+    actual_values: []
+  cis_3_4_3:
+    rule: "3.4.3"
+    description: "Ensure /etc/hosts.deny is configured"
+    expected_values: []
+    actual_values: []
+  cis_3_4_4:
+    rule: "3.4.4"
+    description: "Ensure permissions on /etc/hosts.allow are configured"
+    expected_values: []
+    actual_values: []
+  cis_3_4_5:
+    rule: "3.4.5"
+    description: "Ensure permissions on /etc/hosts.deny are configured"
+    expected_values: []
+    actual_values: []
+  cis_3_5_1:
+    rule: "3.5.1"
+    description: "Ensure DCCP is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_5_2:
+    rule: "3.5.2"
+    description: "Ensure SCTP is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_5_3:
+    rule: "3.5.3"
+    description: "Ensure RDS is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_5_4:
+    rule: "3.5.4"
+    description: "Ensure TIPC is disabled"
+    expected_values: []
+    actual_values: []
+  cis_3_6_1:
+    rule: "3.6.1"
+    description: "Ensure iptables is installed"
+    expected_values: []
+    actual_values: []
+  cis_4_1_1_1:
+    rule: "4.1.1.1"
+    description: "Ensure audit log storage size is configured"
+    expected_values: []
+    actual_values: []
+  cis_4_1_1_2:
+    rule: "4.1.1.2"
+    description: "Ensure system is disabled when audit logs are full"
+    expected_values: []
+    actual_values: []
+  cis_4_1_1_3:
+    rule: "4.1.1.3"
+    description: "Ensure audit logs are not automatically deleted"
+    expected_values: []
+    actual_values: []
+  cis_4_1_2:
+    rule: "4.1.2"
+    description: "Ensure auditd service is enabled"
+    expected_values: []
+    actual_values: []
+  cis_4_1_3:
+    rule: "4.1.3"
+    description: "Ensure auditing for processes that start prior to auditd is enabled"
+    expected_values: []
+    actual_values: []
+  cis_4_1_4:
+    rule: "4.1.4"
+    description: "Ensure events that modify date and time information are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_5:
+    rule: "4.1.5"
+    description: "Ensure events that modify user/group information are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_6:
+    rule: "4.1.6"
+    description: "Ensure events that modify the system's network environment are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_7:
+    rule: "4.1.7"
+    description: "Ensure events that modify the system's Mandatory Access Controls are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_8:
+    rule: "4.1.8"
+    description: "Ensure login and logout events are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_9:
+    rule: "4.1.9"
+    description: "Ensure session initiation information is collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_10:
+    rule: "4.1.10"
+    description: "Ensure discretionary access control permission modification events are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_11:
+    rule: "4.1.11"
+    description: "Ensure unsuccessful unauthorized file access attempts are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_12:
+    rule: "4.1.12"
+    description: "Ensure use of privileged commands is collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_13:
+    rule: "4.1.13"
+    description: "Ensure successful file system mounts are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_14:
+    rule: "4.1.14"
+    description: "Ensure file deletion events by users are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_15:
+    rule: "4.1.15"
+    description: "Ensure changes to system administration scope (sudoers) is collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_16:
+    rule: "4.1.16"
+    description: "Ensure system administrator actions (sudolog) are collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_17:
+    rule: "4.1.17"
+    description: "Ensure kernel module loading and unloading is collected"
+    expected_values: []
+    actual_values: []
+  cis_4_1_18:
+    rule: "4.1.18"
+    description: "Ensure the audit configuration is immutable"
+    expected_values: []
+    actual_values: []
+  cis_4_2_1_1:
+    rule: "4.2.1.1"
+    description: "Ensure rsyslog Service is enabled"
+    expected_values: []
+    actual_values: []
+  cis_4_2_1_3:
+    rule: "4.2.1.3"
+    description: "Ensure rsyslog default file permissions configured"
+    expected_values: []
+    actual_values: []
+  cis_4_2_1_4:
+    rule: "4.2.1.4"
+    description: "Ensure rsyslog is configured to send logs to a remote log host"
+    expected_values: []
+    actual_values: []
+  cis_4_2_2_1:
+    rule: "4.2.2.1"
+    description: "Ensure syslog-ng service is enabled"
+    expected_values: []
+    actual_values: []
+  cis_4_2_2_3:
+    rule: "4.2.2.3"
+    description: "Ensure syslog-ng default file permissions configured"
+    expected_values: []
+    actual_values: []
+  cis_4_2_3:
+    rule: "4.2.3"
+    description: "Ensure rsyslog or syslog-ng is installed"
+    expected_values: []
+    actual_values: []
+  cis_4_2_4:
+    rule: "4.2.4"
+    description: "Ensure permissions on all logfiles are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_1:
+    rule: "5.1.1"
+    description: "Ensure cron daemon is enabled"
+    expected_values: []
+    actual_values: []
+  cis_5_1_2:
+    rule: "5.1.2"
+    description: "Ensure permissions on /etc/crontab are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_3:
+    rule: "5.1.3"
+    description: "Ensure permissions on /etc/cron.hourly are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_4:
+    rule: "5.1.4"
+    description: "Ensure permissions on /etc/cron.daily are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_5:
+    rule: "5.1.5"
+    description: "Ensure permissions on /etc/cron.weekly are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_6:
+    rule: "5.1.6"
+    description: "Ensure permissions on /etc/cron.monthly are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_7:
+    rule: "5.1.7"
+    description: "Ensure permissions on /etc/cron.d are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_1_8:
+    rule: "5.1.8"
+    description: "Ensure at/cron is restricted to authorized users"
+    expected_values: []
+    actual_values: []
+  cis_5_2_1:
+    rule: "5.2.1"
+    description: "Ensure permissions on /etc/ssh/sshd_config are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_2_2:
+    rule: "5.2.2"
+    description: "Ensure SSH Protocol is set to 2"
+    expected_values: []
+    actual_values: []
+  cis_5_2_3:
+    rule: "5.2.3"
+    description: "Ensure SSH LogLevel is set to INFO"
+    expected_values: []
+    actual_values: []
+  cis_5_2_4:
+    rule: "5.2.4"
+    description: "Ensure SSH X11 forwarding is disabled"
+    expected_values: []
+    actual_values: []
+  cis_5_2_5:
+    rule: "5.2.5"
+    description: "Ensure SSH MaxAuthTries is set to 4 or less"
+    expected_values: []
+    actual_values: []
+  cis_5_2_6:
+    rule: "5.2.6"
+    description: "Ensure SSH IgnoreRhosts is enabled"
+    expected_values: []
+    actual_values: []
+  cis_5_2_7:
+    rule: "5.2.7"
+    description: "Ensure SSH HostbasedAuthentication is disabled"
+    expected_values: []
+    actual_values: []
+  cis_5_2_8:
+    rule: "5.2.8"
+    description: "Ensure SSH root login is disabled"
+    expected_values: []
+    actual_values: []
+  cis_5_2_9:
+    rule: "5.2.9"
+    description: "Ensure SSH PermitEmptyPasswords is disabled"
+    expected_values: []
+    actual_values: []
+  cis_5_2_10:
+    rule: "5.2.10"
+    description: "Ensure SSH PermitUserEnvironment is disabled"
+    expected_values: []
+    actual_values: []
+  cis_5_2_11:
+    rule: "5.2.11"
+    description: "Ensure only approved MAC algorithms are used"
+    expected_values: []
+    actual_values: []
+  cis_5_2_12:
+    rule: "5.2.12"
+    description: "Ensure SSH Idle Timeout Interval is configured"
+    expected_values: []
+    actual_values: []
+  cis_5_2_13:
+    rule: "5.2.13"
+    description: "Ensure SSH LoginGraceTime is set to one minute or less"
+    expected_values: []
+    actual_values: []
+  cis_5_2_14:
+    rule: "5.2.14"
+    description: "Ensure SSH access is limited"
+    expected_values: []
+    actual_values: []
+  cis_5_2_15:
+    rule: "5.2.15"
+    description: "Ensure SSH warning banner is configured"
+    expected_values: []
+    actual_values: []
+  cis_5_3_1:
+    rule: "5.3.1"
+    description: "Ensure password creation requirements are configured"
+    expected_values: []
+    actual_values: []
+  cis_5_3_2:
+    rule: "5.3.2"
+    description: "Ensure lockout for failed password attempts is configured"
+    expected_values: []
+    actual_values: []
+  cis_5_3_3:
+    rule: "5.3.3"
+    description: "Ensure password reuse is limited"
+    expected_values: []
+    actual_values: []
+  cis_5_3_4:
+    rule: "5.3.4"
+    description: "Ensure password hashing algorithm is SHA-512"
+    expected_values: []
+    actual_values: []
+  cis_5_4_1_1:
+    rule: "5.4.1.1"
+    description: "Ensure password expiration is 365 days or less"
+    expected_values: []
+    actual_values: []
+  cis_5_4_1_2:
+    rule: "5.4.1.2"
+    description: "Ensure minimum days between password changes is 7 or more"
+    expected_values: []
+    actual_values: []
+  cis_5_4_1_3:
+    rule: "5.4.1.3"
+    description: "Ensure password expiration warning days is 7 or more"
+    expected_values: []
+    actual_values: []
+  cis_5_4_1_4:
+    rule: "5.4.1.4"
+    description: "Ensure inactive password lock is 30 days or less"
+    expected_values: []
+    actual_values: []
+  cis_5_4_2:
+    rule: "5.4.2"
+    description: "Ensure system accounts are non-login"
+    expected_values: []
+    actual_values: []
+  cis_5_4_3:
+    rule: "5.4.3"
+    description: "Ensure default group for the root account is GID 0"
+    expected_values: []
+    actual_values: []
+  cis_5_4_4:
+    rule: "5.4.4"
+    description: "Ensure default user umask is 027 or more restrictive"
+    expected_values: []
+    actual_values: []
+  cis_5_6:
+    rule: "5.6"
+    description: "Ensure access to the su command is restricted"
+    expected_values: []
+    actual_values: []
+  cis_6_1_1:
+    rule: "6.1.1"
+    description: "Audit system file permissions"
+    expected_values: []
+    actual_values: []
+  cis_6_1_2:
+    rule: "6.1.2"
+    description: "Ensure permissions on /etc/passwd are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_3:
+    rule: "6.1.3"
+    description: "Ensure permissions on /etc/shadow are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_4:
+    rule: "6.1.4"
+    description: "Ensure permissions on /etc/group are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_5:
+    rule: "6.1.5"
+    description: "Ensure permissions on /etc/gshadow are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_6:
+    rule: "6.1.6"
+    description: "Ensure permissions on /etc/passwd- are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_7:
+    rule: "6.1.7"
+    description: "Ensure permissions on /etc/shadow- are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_8:
+    rule: "6.1.8"
+    description: "Ensure permissions on /etc/group- are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_9:
+    rule: "6.1.9"
+    description: "Ensure permissions on /etc/gshadow- are configured"
+    expected_values: []
+    actual_values: []
+  cis_6_1_10:
+    rule: "6.1.10"
+    description: "Ensure no world writable files exist"
+    expected_values: []
+    actual_values: []
+  cis_6_1_11:
+    rule: "6.1.11"
+    description: "Ensure no unowned files or directories exist"
+    expected_values: []
+    actual_values: []
+  cis_6_1_12:
+    rule: "6.1.12"
+    description: "Ensure no ungrouped files or directories exist"
+    expected_values: []
+    actual_values: []
+  cis_6_2_1:
+    rule: "6.2.1"
+    description: "Ensure password fields are not empty"
+    expected_values: []
+    actual_values: []
+  cis_6_2_2:
+    rule: "6.2.2"
+    description: "Ensure no legacy \"+\" entries exist in /etc/passwd"
+    expected_values: []
+    actual_values: []
+  cis_6_2_3:
+    rule: "6.2.3"
+    description: "Ensure no legacy \"+\" entries exist in /etc/shadow"
+    expected_values: []
+    actual_values: []
+  cis_6_2_4:
+    rule: "6.2.4"
+    description: "Ensure no legacy \"+\" entries exist in /etc/group"
+    expected_values: []
+    actual_values: []
+  cis_6_2_5:
+    rule: "6.2.5"
+    description: "Ensure root is the only UID 0 account"
+    expected_values: []
+    actual_values: []
+  cis_6_2_6:
+    rule: "6.2.6"
+    description: "Ensure root PATH Integrity"
+    expected_values: []
+    actual_values: []
+  cis_6_2_7:
+    rule: "6.2.7"
+    description: "Ensure all users' home directories exist"
+    expected_values: []
+    actual_values: []
+  cis_6_2_8:
+    rule: "6.2.8"
+    description: "Ensure users' home directories permissions are 750 or more restrictive"
+    expected_values: []
+    actual_values: []
+  cis_6_2_9:
+    rule: "6.2.9"
+    description: "Ensure users own their home directories"
+    expected_values: []
+    actual_values: []
+  cis_6_2_10:
+    rule: "6.2.10"
+    description: "Ensure users' dot files are not group or world writable"
+    expected_values: []
+    actual_values: []
+  cis_6_2_11:
+    rule: "6.2.11"
+    description: "Ensure no users have .forward files"
+    expected_values: []
+    actual_values: []
+  cis_6_2_12:
+    rule: "6.2.12"
+    description: "Ensure no users have .netrc files"
+    expected_values: []
+    actual_values: []
+  cis_6_2_13:
+    rule: "6.2.13"
+    description: "Ensure users' .netrc Files are not group or world accessible"
+    expected_values: []
+    actual_values: []
+  cis_6_2_14:
+    rule: "6.2.14"
+    description: "Ensure no users have .rhosts files"
+    expected_values: []
+    actual_values: []
+  cis_6_2_15:
+    rule: "6.2.15"
+    description: "Ensure all groups in /etc/passwd exist in /etc/group"
+    expected_values: []
+    actual_values: []
+  cis_6_2_16:
+    rule: "6.2.16"
+    description: "Ensure no duplicate UIDs exist"
+    expected_values: []
+    actual_values: []
+  cis_6_2_17:
+    rule: "6.2.17"
+    description: "Ensure no duplicate GIDs exist"
+    expected_values: []
+    actual_values: []
+  cis_6_2_18:
+    rule: "6.2.18"
+    description: "Ensure no duplicate user names exist"
+    expected_values: []
+    actual_values: []
+  cis_6_2_19:
+    rule: "6.2.19"
+    description: "Ensure no duplicate group names exist"
+    expected_values: []
+    actual_values: []
+
+# Keppel
+  keppel_7_5_6:
+    rule: "7.5.6"
+    description: "Firewalld is active"
+    expected_values: []
+    actual_values: []
+  keppel_8_2_3:
+    rule: "8.2.3"
+    description: "Configure /etc/rsyslog.conf"
+    expected_values: []
+    actual_values: []
+  keppel_10_1_1:
+    rule: "10.1.1"
+    description: "Set Password Expiration Days"
+    expected_values: []
+    actual_values: []
+  keppel_10_1_2:
+    rule: "10.1.2"
+    description: "Set Password Change Minimum Number of Days"
+    expected_values: []
+    actual_values: []
+  keppel_10_1_3:
+    rule: "10.1.3"
+    description: "Set Password Expiring Warning Days"
+    expected_values: []
+    actual_values: []
+  keppel_13_21:
+    rule: "13.21"
+    description: "Verify No Legacy \"+\" Entries Exist in /etc/passwd File"
+    expected_values: []
+    actual_values: []
+  keppel_13_38:
+    rule: "13.38"
+    description: |-
+      "Ensure password expiration is 90 days or less
+
+      Ensure at least one file named /etc/login.defs exists and matches pattern ^\\s*PASS_MAX_DAYS\\s+(90|[1-8][0-9]|[1-9])\\s*(\\s+#.*)?$"
+    expected_values: []
+    actual_values: []

@@ -1,0 +1,46 @@
+---
+# Compliance audit - ubuntu_cis_4_1_3 #
+########################################
+# ubuntu_rule_key - key of the rule
+# ubuntu_baseline_key - key of the baseline being checked
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Display current value of variables
+  debug:
+    msg: |-
+      ubuntu_rule_key: {{ ubuntu_rule_key }}
+      ubuntu_baseline_key: {{ ubuntu_baseline_key }}
+    verbosity: 2
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Set values for count variable
+  set_fact:
+    ubuntu_audit_match_count: 0
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Check if each actual value is in each expected value
+  set_fact:
+    ubuntu_audit_match_count: "{{ ubuntu_audit_match_count  | default(0) | int + 1 }}"
+  when: actual_value_item | regex(ubuntu_rules[ubuntu_rule_key]['expected_values'][0])
+  loop: "{{ ubuntu_rules[ubuntu_rule_key]['actual_values'] }}"
+  loop_control:
+    index_var: actual_value_index
+    loop_var: actual_value_item
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Mark as compliant
+  set_fact:
+    ubuntu_hardening_compliance_baseline_data: "{{ ubuntu_hardening_compliance_baseline_data | combine({ubuntu_baseline_key: {'compliance': 'C' }}, recursive=true) }}"
+  when: ubuntu_audit_match_count | int == ubuntu_rules[ubuntu_rule_key]['actual_values'] | length
+
+- name: Compliance Audit | {{ ubuntu_baseline_key }} | Display compliance
+  debug:
+    msg: |-
+      Number of actual values and expected values matches: {{ ubuntu_audit_match_count }}
+      Compliance: {{ ubuntu_hardening_compliance_baseline_data[ubuntu_baseline_key]['compliance'] }}
+    verbosity: 2
+
+- name: Risk Register Check | {{ ubuntu_baseline_key }}
+  include_tasks: risk_register_check.yml
+  vars:
+    ubuntu_risk_register_rule_key: "{{ ubuntu_rule_key }}"
+    ubuntu_risk_register_baseline_key: "{{ ubuntu_baseline_key }}"
+  when:
+    - ubuntu_hardening_compliance_baseline_data is defined
+    - ubuntu_hardening_compliance_baseline_data[ubuntu_baseline_key]['compliance'] == 'NC'

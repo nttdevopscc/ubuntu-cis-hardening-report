@@ -1,0 +1,26 @@
+---
+- name: Import all configuration dictionaries
+  include_vars:
+    dir: vars/configuration
+
+- name: Compliance Audit
+  include_tasks: "{{ item['value']['compliance_audit'] }}"
+  vars:
+    ubuntu_rule_key: "{{ item['value']['rule'] }}"
+    ubuntu_baseline_key: "{{ item['key'] }}"
+  loop: "{{ lookup('dict', ubuntu_hardening_compliance_baseline_data) }}"
+  loop_control:
+    label: "ubuntu_{{ item['value']['rule'] }}: {{ item['key'] }}, {{ item['value']['rule'] }}"
+  when:
+    - ubuntu_hardening_compliance_baseline_data is defined
+    - item['value']['compliance_audit'] is defined
+    - item['value']['compliance_audit']
+
+- name: Get a summary of compliance to the rules
+  include_tasks: hardening_compliance_summary.yml
+  vars:
+    ubuntu_summary_baseline_key: "{{ item }}"
+  loop: "{{ ubuntu_hardening_compliance_baseline }}"
+  loop_control:
+    label: "{{ item }}"
+  when: ubuntu_hardening_compliance_baseline is defined

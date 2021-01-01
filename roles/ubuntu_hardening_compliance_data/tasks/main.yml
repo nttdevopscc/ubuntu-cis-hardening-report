@@ -1,0 +1,46 @@
+---
+- name: Check Operating System 
+  fail:
+    msg: "Ensure that the managed node is Ubuntu 20.04"
+  when:
+    - not ansible_os_family == "Ubuntu"
+    - not ansible_distribution_major_version == "20.04"
+
+- name: Import all rules dictionaries
+  include_vars:
+    dir: vars/rules
+
+- name: Check for compliance of rules
+  include_tasks: "{{ ubuntu_rule_item }}"
+  loop:
+    - rules/ubuntu_cis_1_1_1_disable_unused_filesystems.yml
+    - rules/ubuntu_cis_1_1_filesystem_configuration.yml
+    - rules/ubuntu_cis_1_2_configure_software_updates.yml
+    - rules/ubuntu_cis_1_3_filesystem_integrity_checking.yml
+    - rules/ubuntu_cis_1_4_secure_boot_settings.yml
+    - rules/ubuntu_cis_1_5_additional_process_hardening.yml
+    - rules/ubuntu_cis_1_7_1_command_line_warning_banners.yml
+    - rules/ubuntu_cis_2_1_inetd_services.yml
+    - rules/ubuntu_cis_2_2_1_time_synchronization.yml
+    - rules/ubuntu_cis_2_2_special_purpose_services.yml
+    - rules/ubuntu_cis_2_3_service_clients.yml
+    - rules/ubuntu_cis_3_1_network_parameters_host_only.yml
+    - rules/ubuntu_cis_3_2_network_parameters_host_and_router.yml
+    - rules/ubuntu_cis_3_3_ipv6.yml
+    - rules/ubuntu_cis_3_4_tcp_wrappers.yml
+    - rules/ubuntu_cis_3_5_uncommon_network_protocols.yml
+    - rules/ubuntu_cis_3_6_firewall_configuration.yml
+    - rules/ubuntu_cis_4_1_1_configure_data_retention.yml
+    - rules/ubuntu_cis_4_1_configure_system_accounting.yml
+    - rules/ubuntu_cis_4_2_configure_rsyslog.yml
+    - rules/ubuntu_cis_4_2_2_configure_syslog-ng.yml
+    - rules/ubuntu_cis_5_1_configure_cron.yml
+    - rules/ubuntu_cis_5_2_ssh_server_configuration.yml
+    - rules/ubuntu_cis_5_3_configure_pam.yml
+    - rules/ubuntu_cis_5_4_1_set_shadow_password_suite_parameters.yml
+    - rules/ubuntu_cis_5_4_user_accounts_and_environment.yml
+    - rules/ubuntu_cis_6_1_system_file_permissions.yml
+    - rules/ubuntu_cis_6_2_user_and_group_settings.yml
+    - rules/ubuntu_keppel.yml
+  loop_control:
+    loop_var: ubuntu_rule_item

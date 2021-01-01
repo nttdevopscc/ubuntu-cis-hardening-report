@@ -1,0 +1,232 @@
+---
+- name: 5.2.1
+  block:
+    - name: 5.2.1 Ensure permissions on /etc/ssh/sshd_config are configured
+      shell: stat /etc/ssh/sshd_config -c "%a %U %G"
+      register: ubuntu_cis_5_2_1_out
+
+    - name: 5.2.1 Ensure permissions on /etc/ssh/sshd_config are configured | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_1"
+        ubuntu_cis_rule_expected_values:
+          - "600 root root"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_1_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_1 | bool
+
+# - name: 5.2.2
+#   block:
+#     - name: 5.2.2 Ensure permissions on SSH private host key files are configured
+
+# - name: 5.2.3
+#   block:
+#     - name: 5.2.3 Ensure permissions on SSH public host key files are configured
+
+# - name: 5.2.4
+#   block:
+#     - name: 5.2.4 Ensure SSH LogLevel is appropriate
+
+- name: 5.2.5
+  block:
+    - name: 5.2.5 Ensure SSH X11 forwarding is disabled
+      shell: grep "^X11Forwarding" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_5_out
+
+    - name: 5.2.5 Ensure SSH X11 forwarding is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_5"
+        ubuntu_cis_rule_expected_values:
+          - "X11Forwarding no"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_5_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_5 | bool
+
+- name: 5.2.6
+  block:
+    - name: 5.2.6 Ensure SSH MaxAuthTries is set to 4 or less
+      shell: grep "^MaxAuthTries" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_6_out
+
+    - name: 5.2.6 Ensure SSH MaxAuthTries is set to 4 or less | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_6"
+        ubuntu_cis_rule_expected_values:
+          - - "MaxAuthTries"
+            - "1"
+            - "4"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_6_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_6 | bool
+
+- name: 5.2.7
+  block:
+    - name: 5.2.7 Ensure SSH IgnoreRhosts is enabled
+      shell: grep "^IgnoreRhosts" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_7_out
+
+    - name: 5.2.7 Ensure SSH IgnoreRhosts is enabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_7"
+        ubuntu_cis_rule_expected_values:
+          - "IgnoreRhosts yes"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_7_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_7 | bool
+
+- name: 5.2.8
+  block:
+    - name: 5.2.8 Ensure SSH HostbasedAuthentication is disabled
+      shell: grep "^HostbasedAuthentication" /etc/ssh/sshd_config
+      register: ubuntu_cis_5_2_8_out
+
+    - name: 5.2.8 Ensure SSH HostbasedAuthentication is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_8"
+        ubuntu_cis_rule_expected_values:
+          - "HostbasedAuthentication no"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_8_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_8 | bool
+
+- name: 5.2.9
+  block:
+    - name: 5.2.9 Ensure SSH root login is disabled
+      shell: grep "^PermitRootLogin" /etc/ssh/sshd_config
+      register: ubuntu_cis_5_2_9_out
+
+    - name: 5.2.9 Ensure SSH root login is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_9"
+        ubuntu_cis_rule_expected_values:
+          - "PermitRootLogin no"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_9_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_9 | bool
+
+- name: 5.2.10
+  block:
+    - name: 5.2.10 Ensure SSH PermitEmptyPasswords is disabled
+      shell: grep "^PermitEmptyPasswords" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_10_out
+
+    - name: 5.2.10 Ensure SSH PermitEmptyPasswords is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_10"
+        ubuntu_cis_rule_expected_values:
+          - "PermitEmptyPasswords no"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_10_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_10 | bool
+
+- name: 5.2.11
+  block:
+    - name: 5.2.11 Ensure SSH PermitUserEnvironment is disabled
+      shell: grep PermitUserEnvironment /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_11_out
+
+    - name: 5.2.11 Ensure SSH PermitUserEnvironment is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_11"
+        ubuntu_cis_rule_expected_values:
+          - "PermitUserEnvironment no"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_11_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_11 | bool
+
+# - name: 5.2.12
+#   block:
+#     - name: 5.2.12 Ensure only strong Ciphers are used
+
+# - name: 5.2.13
+#   block:
+#     - name: 5.2.13 Ensure only strong MAC Algorithms are used
+
+# - name: 5.2.14
+#   block:
+#     - name: 5.2.14 Ensure only strong Key Exchange algorithms are used
+
+- name: 5.2.15
+  block:
+    - name: 5.2.15 Ensure SSH Idle Timeout Interval is configured
+      shell: "{{ item }}"
+      loop:
+        - grep "^ClientAliveInterval" /etc/ssh/sshd_config | grep -v ^#
+        - grep "^ClientAliveCountMax" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_15_out
+
+    - name: 5.2.11 Ensure SSH Idle Timeout Interval is configured | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_15"
+        ubuntu_cis_rule_expected_values:
+          - - "ClientAliveInterval" 
+            - - "1"
+              - "300"
+          - - "ClientAliveCountMax"
+            - - "0"
+              - "3"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_15_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_15 | bool
+
+- name: 5.2.16
+  block:
+    - name: 5.2.16 Ensure SSH LoginGraceTime is set to one minute or less
+      shell: grep "^LoginGraceTime" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_16_out
+
+    - name: 5.2.16 Ensure SSH LoginGraceTime is set to one minute or less | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_16"
+        ubuntu_cis_rule_expected_values:
+          - - "LoginGraceTime"
+            - - "1"
+              - "60"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_16_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_16 | bool
+
+# - name: 5.2.17
+#   block:
+#     - name: 5.2.17 Ensure SSH access is limited
+
+- name: 5.2.18
+  block:
+    - name: 5.2.18 Ensure SSH warning banner is configured
+      shell: grep "^Banner" /etc/ssh/sshd_config | grep -v ^#
+      register: ubuntu_cis_5_2_18_out
+
+    - name: 5.2.18 Ensure SSH warning banner is configured | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_5_2_18"
+        ubuntu_cis_rule_expected_values:
+          - "Banner /etc/issue.net"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_5_2_18_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_5_2_18 | bool
+
+# - name: 5.2.19
+#   block:
+#     - name: 5.2.19 Ensure SSH PAM is enabled
+
+# - name: 5.2.20
+#   block:
+#     - name: 5.2.20 Ensure SSH AllowTcpForwarding is disabled
+
+# - name: 5.2.21
+#   block:
+#     - name: 5.2.21 Ensure SSH MaxStartups is configured
+
+# - name: 5.2.22
+#   block:
+#     - name: 5.2.22 Ensure SSH MaxSessions is limited

@@ -1,0 +1,10 @@
+---
+# Avoid modifying this file, and overwrite values in /vars instead
+
+# Inventory #
+#############
+group_name: ubuntu_servers
+
+# Hardening Compliance Summary #
+################################
+ubuntu_hardening_compliance_summary: [] # Will contain data to be used in the report summary section

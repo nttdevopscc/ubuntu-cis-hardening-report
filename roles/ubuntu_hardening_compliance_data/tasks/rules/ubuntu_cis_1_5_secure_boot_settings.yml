@@ -1,0 +1,54 @@
+---
+
+
+- name: 1.5.1
+  block:
+    - name: 1.5.1 Ensure bootloader password is set
+      shell: grep "^GRUB2_PASSWORD" /boot/grub2/grub.cfg
+      register: ubuntu_cis_1_5_1_out
+
+    - name: 1.5.1 Ensure bootloader password is set | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_5_1"
+        ubuntu_cis_rule_expected_values:
+          - "GRUB2_PASSWORD"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_5_1_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_5_1 | bool
+
+- name: 1.5.2
+  block:
+    - name: 1.5.2 Ensure permissions on bootloader config are configured
+      shell: stat /boot/grub2/grub.cfg -c "%a %U %G"
+      register: ubuntu_cis_1_5_2_out
+
+    - name: 1.5.2 Ensure permissions on bootloader config are configured | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_5_2"
+        ubuntu_cis_rule_expected_values:
+          - "600 root root"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_5_2_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_5_2 | bool
+
+- name: 1.5.3
+  block:
+    - name: 1.5.3 Ensure authentication required for single user mode
+      shell: "{{ item }}"
+      loop:
+        - grep /sbin/sulogin /usr/lib/systemd/system/rescue.service
+        - grep /sbin/sulogin /usr/lib/systemd/system/emergency.service
+      register: ubuntu_cis_1_5_3_out
+
+    - name: 1.5.3 Ensure authentication required for single user mode | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_5_3"
+        ubuntu_cis_rule_expected_values:
+          - "/usr/sbin/sulogin"
+          - "/usr/sbin/sulogin"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_5_3_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_5_3 | bool

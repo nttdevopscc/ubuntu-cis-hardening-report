@@ -1,0 +1,48 @@
+---
+
+- name: 3.2.1
+  block:
+    - name: 3.2.1 Ensure packet redirect sending is disabled
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.conf.all.send_redirects | sed -e 's/ //g'
+        - sysctl net.ipv4.conf.default.send_redirects | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.all\.send_redirects" /etc/sysctl.conf | sed -e 's/ //g'
+        - grep "net\.ipv4\.conf\.default\.send_redirects" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_2_1_out
+
+    - name: 3.2.2 Ensure packet redirect sending is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_2_1"
+        ubuntu_cis_rule_expected_values:
+          - "net.ipv4.conf.all.send_redirects=0"
+          - "net.ipv4.conf.default.send_redirects=0"
+          - "net.ipv4.conf.all.send_redirects=0"
+          - "net.ipv4.conf.default.send_redirects=0"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_2_1_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_2_2 | bool
+
+- name: 3.2.2
+  block:
+    - name: 3.2.2 Ensure IP forwarding is disabled
+      shell: "{{ item }}"
+      loop:
+        - sysctl net.ipv4.ip_forward | sed -e 's/ //g'
+        - grep "net\.ipv4\.ip_forward" /etc/sysctl.conf | sed -e 's/ //g'
+      register: ubuntu_cis_3_2_2_out
+
+    - name: 3.2.2 Ensure IP forwarding is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_3_2_2"
+        ubuntu_cis_rule_expected_values:
+          - "net.ipv4.ip_forward=0"
+          - "net.ipv4.ip_forward=0"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_3_2_2_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_3_2_1 | bool
+  
+
+

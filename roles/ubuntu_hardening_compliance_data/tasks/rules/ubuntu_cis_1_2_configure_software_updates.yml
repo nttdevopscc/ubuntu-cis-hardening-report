@@ -1,0 +1,9 @@
+---
+
+# - name: 1.2.1
+#   block:
+#     - name: 1.2.1 Ensure GPG keys are configured
+
+# - name: 1.2.2
+#   block:
+#     - name: 1.2.2 Ensure package manager repositories are configured

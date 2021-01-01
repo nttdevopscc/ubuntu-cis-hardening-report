@@ -1,0 +1,51 @@
+---
+# Risk Register Check #
+#######################
+# ubuntu_risk_register_rule_key - key of the rule
+# ubuntu_risk_register_baseline_key - key of the baseline being checked
+
+- name: Risk Register Check | {{ ubuntu_risk_register_baseline_key }} | Display current value of variables
+  debug:
+    msg: |-
+      ubuntu_risk_register_baseline_key: {{ ubuntu_risk_register_baseline_key }}
+      ubuntu_risk_register_rule_key: {{ ubuntu_risk_register_rule_key }}
+    verbosity: 2
+
+- name: Risk Register Check | {{ ubuntu_risk_register_baseline_key }} | Set values for count variables
+  set_fact:
+    ubuntu_risk_register_match_count: 0
+
+- name: Risk Register Check | {{ ubuntu_risk_register_baseline_key }} | Get accepted values from risk register
+  set_fact:
+    ubuntu_risk_register_accepted_values: "{{ ubuntu_risk_register[inventory_hostname][ubuntu_risk_register_baseline_key]['accepted_values'] }}"
+  when:
+    - ubuntu_risk_register[inventory_hostname] is defined
+    - ubuntu_risk_register[inventory_hostname][ubuntu_risk_register_baseline_key] is defined
+    - ubuntu_risk_register[inventory_hostname][ubuntu_risk_register_baseline_key]['accepted_values'] is defined
+
+- name: Risk Register Check | {{ ubuntu_risk_register_baseline_key }} | Check if actual value/s are accepted in the risk register
+  set_fact:
+    ubuntu_risk_register_match_count: "{{ ubuntu_risk_register_match_count | default(0) | int + 1 }}"
+  when:
+    - ubuntu_risk_register_accepted_values is defined
+    - ubuntu_risk_register_accepted_values[risk_register_actual_value_index] is defined
+    - risk_register_actual_value_item == ubuntu_risk_register_accepted_values[risk_register_actual_value_index]
+  loop: "{{ ubuntu_rules[ubuntu_risk_register_rule_key]['actual_values'] }}"
+  loop_control:
+    index_var: risk_register_actual_value_index
+    loop_var: risk_register_actual_value_item
+
+- name: Risk Register Check | {{ ubuntu_risk_register_baseline_key }} | Mark as risk accepted
+  set_fact:
+    ubuntu_hardening_compliance_baseline_data: "{{ ubuntu_hardening_compliance_baseline_data | combine({ubuntu_risk_register_baseline_key: {'compliance': 'RA' }}, recursive=true) }}"
+  when:
+    - ubuntu_risk_register_accepted_values is defined
+    - ubuntu_risk_register_accepted_values | length == ubuntu_rules[ubuntu_risk_register_rule_key]['actual_values'] | length
+    - ubuntu_risk_register_accepted_values | length == ubuntu_risk_register_match_count | int
+
+- name: Risk Register Check | {{ ubuntu_risk_register_baseline_key }} | Display match count data
+  debug:
+    msg: |-
+      Number of risk register accepted values: {{ ubuntu_risk_register_accepted_values | default([]) | length }}
+      Number of actual values and risk register accepted values matches: {{ ubuntu_risk_register_match_count }}
+    verbosity: 2

@@ -1,0 +1,46 @@
+---
+- name: Get a summary of compliance to the rules | {{ ubuntu_summary_baseline_key }} | Display current value of variables
+  debug:
+    msg: |-
+      ubuntu_summary_baseline_key: {{ ubuntu_summary_baseline_key }}
+    verbosity: 2
+
+- name: Get a summary of compliance to the rules | {{ ubuntu_summary_baseline_key }} | Set values for count variables
+  set_fact:
+    ubuntu_summary_compliant_count: 0
+    ubuntu_summary_non_compliant_count: 0
+    ubuntu_summary_risk_accepted_count: 0
+
+- name: Get a summary of compliance to the rules | {{ ubuntu_summary_baseline_key }} | Get sum of all compliant managed nodes
+  set_fact:
+    ubuntu_summary_compliant_count: "{{ ubuntu_summary_compliant_count | default(0) | int + 1 if hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key]['compliance'] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key]['compliance'] == 'C' else ubuntu_summary_compliant_count }}"
+    ubuntu_summary_non_compliant_count: "{{ ubuntu_summary_non_compliant_count | default(0) | int + 1 if hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key]['compliance'] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key]['compliance'] == 'NC' else ubuntu_summary_non_compliant_count }}"
+    ubuntu_summary_risk_accepted_count: "{{ ubuntu_summary_risk_accepted_count | default(0) | int + 1 if hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key]['compliance'] is defined and hostvars[ubuntu_summary_host]['ubuntu_hardening_compliance_baseline_data'][ubuntu_summary_baseline_key]['compliance'] == 'RA' else ubuntu_summary_risk_accepted_count }}"
+  loop: "{{ groups[group_name] }}"
+  loop_control:
+    loop_var: ubuntu_summary_host
+  when: >-
+    groups[group_name] is defined
+
+- name: Get a summary of compliance to the rules | {{ ubuntu_summary_baseline_key }} | Set final values for count variables
+  set_fact:
+    ubuntu_hardening_compliance_summary_item:
+      - baseline: "{{ ubuntu_summary_baseline_key }}"
+        compliant: "{{ ubuntu_summary_compliant_count }}"
+        non_compliant: "{{ ubuntu_summary_non_compliant_count }}"
+        risk_accepted: "{{ ubuntu_summary_risk_accepted_count }}"
+        total: "{{ ubuntu_summary_compliant_count | int + ubuntu_summary_non_compliant_count | int + ubuntu_summary_risk_accepted_count | int }}"
+
+- name: Get a summary of compliance to the rules | {{ ubuntu_summary_baseline_key }} | Add to the summary dictionary
+  set_fact:
+    ubuntu_hardening_compliance_summary: "{{ ubuntu_hardening_compliance_summary + ubuntu_hardening_compliance_summary_item }}"
+
+- name: Get a summary of compliance to the rules | {{ ubuntu_summary_baseline_key }} | Display summary item data
+  debug:
+    msg: |-
+      baseline: '{{ ubuntu_summary_baseline_key }}'
+      compliant: '{{ ubuntu_summary_compliant_count }}'
+      non_compliant: '{{ ubuntu_summary_non_compliant_count }}'
+      risk_accepted: '{{ ubuntu_summary_risk_accepted_count }}'
+      total: '{{ ubuntu_summary_compliant_count | int + ubuntu_summary_non_compliant_count | int + ubuntu_summary_risk_accepted_count | int }}'
+    verbosity: 2

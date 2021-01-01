@@ -1,0 +1,498 @@
+---
+- name: 4.1.3
+  block:
+    - name: 4.1.3 Ensure events that modify date and time information are collected
+      shell: "{{ item }}"
+      loop:
+        - grep time-change /etc/audit/audit.rules
+        - auditctl -l | grep time-change
+      register: ubuntu_cis_4_1_3_out
+
+    - name: 4.1.3 Ensure events that modify date and time information are collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_3_32bit_expected_value: |-
+          "-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k timechange
+          -a always,exit -F arch=b32 -S clock_settime -k time-change
+          -w /etc/localtime -p wa -k time-change"
+
+    - name: 4.1.3 Ensure events that modify date and time information are collected | Set 34bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_6_64bit_expected_value: |-
+          "-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change
+          -a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k timechange
+          -a always,exit -F arch=b64 -S clock_settime -k time-change
+          -a always,exit -F arch=b32 -S clock_settime -k time-change
+          -w /etc/localtime -p wa -k time-change"
+
+    - name: 4.1.3 Ensure events that modify date and time information are collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_3"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_3_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_3_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_8_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.3 Ensure events that modify date and time information are collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_3"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_3_34bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_3_34bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_3_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_3 | bool
+
+- name: 4.1.4
+  block:
+    - name: 4.1.4 Ensure events that modify user/group information are collected
+      shell: "{{ item }}"
+      loop:
+        - grep identity /etc/audit/audit.rules
+        - auditctl -l | grep identity
+      register: ubuntu_cis_4_1_4_out
+
+    - name: 4.1.4 Ensure events that modify user/group information are collected | Set Expected Value
+      set_fact:
+        ubuntu_cis_4_1_4_expected_value:
+          "-w /etc/group -p wa -k identity
+          -w /etc/passwd -p wa -k identity
+          -w /etc/gshadow -p wa -k identity
+          -w /etc/shadow -p wa -k identity
+          -w /etc/security/opasswd -p wa -k identity"
+
+    - name: 4.1.4 Ensure events that modify user/group information are collected | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_4"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_4_expected_value }}"
+          - "{{ ubuntu_cis_4_1_4_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_4_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_4 | bool 
+
+- name: 4.1.5
+  block:
+    - name: 4.1.5 Ensure events that modify the system's network environment are collected
+      shell: "{{ item }}"
+      loop:
+        - grep system-locale /etc/audit/audit.rules
+        - auditctl -l | grep system-locale
+      register: ubuntu_cis_4_1_5_out
+
+    - name: 4.1.5 Ensure events that modify the system's network environment are collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_5_32bit_expected_value: |-
+          "-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale
+          -w /etc/issue -p wa -k system-locale
+          -w /etc/issue.net -p wa -k system-locale
+          -w /etc/hosts -p wa -k system-locale
+          -w /etc/sysconfig/network/ -p wa -k system-locale"
+
+    - name: 4.1.5 Ensure events that modify the system's network environment are collected | Set 64bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_5_64bit_expected_value: |-
+          "-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale
+          -a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale
+          -w /etc/issue -p wa -k system-locale
+          -w /etc/issue.net -p wa -k system-locale
+          -w /etc/hosts -p wa -k system-locale
+          -w /etc/sysconfig/network/ -p wa -k system-locale"
+
+    - name: 4.1.5 Ensure events that modify the system's network environment are collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_5"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_5_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_5_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_5_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.5 Ensure events that modify the system's network environment are collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_5"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_5_64bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_5_64bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_5_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_8 | bool
+
+- name: 4.1.6
+  block:
+    - name: 4.1.6 Ensure events that modify the system's Mandatory Access Controls are collected
+      shell: "{{ item }}"
+      loop:
+        - grep MAC-policy /etc/audit/audit.rules
+        - auditctl -l | grep MAC-policy
+      register: ubuntu_cis_4_1_6_out
+
+    - name: 4.1.6 Ensure events that modify the system's Mandatory Access Controls are collected | Set SELinux Expected Value
+      set_fact:
+        ubuntu_cis_4_1_6_selinux_expected_value: |-
+          "-w /etc/selinux/ -p wa -k MAC-policy
+          -w /usr/share/selinux/ -p wa -k MAC-policy"
+
+    - name: 4.1.6 Ensure events that modify the system's Mandatory Access Controls are collected | Set AppArmor Expected Value
+      set_fact:
+        ubuntu_cis_4_1_6_apparmor_expected_value: |-
+          "-w /etc/apparmor/ -p wa -k MAC-policy
+          -w /etc/apparmor.d/ -p wa -k MAC-policy"
+
+    - name: 4.1.6 Ensure events that modify the system's Mandatory Access Controls are collected | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_6"
+        ubuntu_cis_rule_expected_values:
+          - - "{{ ubuntu_cis_4_1_6_selinux_expected_value }}"
+            - "{{ ubuntu_cis_4_1_6_apparmor_expected_value }}"
+          - - "{{ ubuntu_cis_4_1_6_selinux_expected_value }}"
+            - "{{ ubuntu_cis_4_1_6_apparmor_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_6_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_6 | bool
+
+- name: 4.1.7
+  block:
+    - name: 4.1.7 Ensure login and logout events are collected
+      shell: "{{ item }}"
+      loop:
+        - grep logins /etc/audit/audit.rules
+        - auditctl -l | grep logins
+      register: ubuntu_cis_4_1_7_out
+
+    - name: 4.1.7 Ensure login and logout events are collected | Set Expected Value
+      set_fact:
+        ubuntu_cis_4_1_7_expected_value: |-
+          "-w /var/log/faillog -p wa -k logins
+          -w /var/log/lastlog -p wa -k logins
+          -w /var/log/tallylog -p wa -k logins"
+
+    - name: 4.1.7 Ensure login and logout events are collected | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_7"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_7_expected_value }}"
+          - "{{ ubuntu_cis_4_1_7_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_7_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_7 | bool
+
+- name: 4.1.8
+  block:
+    - name: 4.1.8 Ensure session initiation information is collected
+      shell: "{{ item }}"
+      loop:
+        - grep session /etc/audit/audit.rules
+        - auditctl -l | grep session
+      register: ubuntu_cis_4_1_8_out
+
+    - name: 4.1.8 Ensure session initiation information is collected | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_8"
+        ubuntu_cis_rule_expected_values:
+          - "-w /var/run/utmp -p wa -k session"
+          - "-w /var/run/utmp -p wa -k session"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_8_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_8 | bool
+
+- name: 4.1.9
+  block:
+    - name: 4.1.9 Ensure discretionary access control permission modification events are collected
+      shell: "{{ item }}"
+      loop:
+        - grep perm_mod /etc/audit/audit.rules
+        - auditctl -l | grep perm_mod
+      register: ubuntu_cis_4_1_9_out
+
+    - name: 4.1.9 Ensure discretionary access control permission modification events are collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_9_32bit_expected_value: |-
+          "-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
+          -a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
+          -a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295
+          -k perm_mod"
+
+    - name: 4.1.9 Ensure discretionary access control permission modification events are collected | Set 64bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_9_64bit_expected_value: |-
+          "-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
+          -a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
+          -a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
+          -a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
+          -a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295
+          -k perm_mod
+          -a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295
+          -k perm_mod"
+
+    - name: 4.1.9 Ensure discretionary access control permission modification events are collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_9"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_9_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_9_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_9_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.9 Ensure discretionary access control permission modification events are collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_9"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_9_64bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_9_64bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_9_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_9 | bool
+
+- name: 4.1.10
+  block:
+    - name: 4.1.10 Ensure unsuccessful unauthorized file access attempts are collected
+      shell: "{{ item }}"
+      loop:
+        - grep access /etc/audit/audit.rules
+        - auditctl -l | grep access
+      register: ubuntu_cis_4_1_10_out
+
+    - name: 4.1.10 Ensure unsuccessful unauthorized file access attempts are collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_10_32bit_expected_value: |-
+          "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access
+           -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access"
+
+    - name: 4.1.11 Ensure unsuccessful unauthorized file access attempts are collected | Set 64bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_10_84bit_expected_value: |-
+          "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access
+          -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access
+          -a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access
+          -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access"
+
+    - name: 4.1.10 Ensure unsuccessful unauthorized file access attempts are collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_10"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_10_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_10_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_10_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.10 Ensure unsuccessful unauthorized file access attempts are collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_10"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_10_84bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_10_84bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_10_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_10 | bool
+
+- name: 4.1.11
+  block:
+    - name: 4.1.11 Ensure use of privileged commands is collected
+      shell: find "{{ ubuntu_cis_4_1_11_partions_expected_value }}" -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk '{print "-a always,exit -F path=" $1 " -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged" }'
+      register: ubuntu_cis_4_1_11_expected_value_out
+
+    - name: 4.1.11 Ensure use of privileged commands is collected | Check if the output is in audit rules
+      shell: auditctl -l | grep privileged
+      register: ubuntu_cis_4_1_11_out
+
+    - name: 4.1.11 Ensure use of privileged commands is collected | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_11"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_11_expected_value_out['stderr'] if ubuntu_cis_4_1_11_expected_value_out['stderr']|length and ubuntu_cis_4_1_11_expected_value_out['rc']|int == 1 else ubuntu_cis_4_1_11_expected_value_out['stdout'] }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_11_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_11 | bool
+
+- name: 4.1.12
+  block:
+    - name: 4.1.12 Ensure successful file system mounts are collected
+      shell: "{{ item }}"
+      loop:
+        - grep mounts /etc/audit/audit.rules
+        - auditctl -l | grep mounts
+      register: ubuntu_cis_4_1_12_out
+
+    - name: 4.1.12 Ensure successful file system mounts are collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_12_32bit_expected_value: -a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts
+
+    - name: 4.1.12 Ensure successful file system mounts are collected | Set 64bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_12_64bit_expected_value: |-
+          "-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts
+          -a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts"
+
+    - name: 4.1.12 Ensure successful file system mounts are collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_12"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_12_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_12_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_12_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.12 Ensure successful file system mounts are collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_12"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_12_64bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_12_64bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_12_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_12 | bool
+
+- name: 4.1.13
+  block:
+    - name: 4.1.13 Ensure file deletion events by users are collected
+      shell: "{{ item }}"
+      loop:
+        - grep delete /etc/audit/audit.rules
+        - auditctl -l | grep delete
+      register: ubuntu_cis_4_1_13_out
+
+    - name: 4.1.13 Ensure file deletion events by users are collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_13_32bit_expected_value: -a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete
+
+    - name: 4.1.13 Ensure file deletion events by users are collected | Set 64bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_13_64bit_expected_value: |-
+          "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete
+          -a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete"
+
+    - name: 4.1.13 Ensure file deletion events by users are collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_13"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_13_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_13_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_13_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.13 Ensure file deletion events by users are collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_13"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_13_64bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_13_64bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_13_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_13 | bool
+
+- name: 4.1.14
+  block:
+    - name: 4.1.14 Ensure changes to system administration scope (sudoers) is collected
+      shell: "{{ item }}"
+      loop:
+        - grep scope /etc/audit/audit.rules
+        - auditctl -l | grep scope
+      register: ubuntu_cis_4_1_14_out
+
+    - name: 4.1.14 Ensure changes to system administration scope (sudoers) is collected | Set Expected Value
+      set_fact:
+        ubuntu_cis_4_1_14_expected_value: |-
+          "-w /etc/sudoers -p wa -k scope
+          -w /etc/sudoers.d/ -p wa -k scope"
+
+    - name: 4.1.14 Ensure changes to system administration scope (sudoers) is collected | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_14"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_14_expected_value }}"
+          - "{{ ubuntu_cis_4_1_14_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_14_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_14 | bool
+
+# - name: 4.1.15
+#   block:
+#     - name: 4.1.15 Ensure system administrator command executions
+
+- name: 4.1.16
+  block:
+    - name: 4.1.16 Ensure kernel module loading and unloading is collected
+      shell: "{{ item }}"
+      loop:
+        - grep modules /etc/audit/audit.rules
+        - auditctl -l | grep modules
+      register: ubuntu_cis_4_1_16_out
+
+    - name: 4.1.16 Ensure kernel module loading and unloading is collected | Set 32bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_16_32bit_expected_value: |-
+          "-w /sbin/insmod -p x -k modules
+          -w /sbin/rmmod -p x -k modules
+          -w /sbin/modprobe -p x -k modules
+          -a always,exit -F arch=b32 -S init_module -S delete_module -k modules"
+
+    - name: 4.1.16 Ensure kernel module loading and unloading is collected | Set 64bit Expected Value
+      set_fact:
+        ubuntu_cis_4_1_16_64bit_expected_value: |-
+          "-w /sbin/insmod -p x -k modules
+          -w /sbin/rmmod -p x -k modules
+          -w /sbin/modprobe -p x -k modules
+          -a always,exit -F arch=b64 -S init_module -S delete_module -k modules"
+
+    - name: 4.1.16 Ensure kernel module loading and unloading is collected | Set Rule Values (32 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_16"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_16_32bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_16_32bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_16_out }}"
+      when: ansible_architecture == 'x86_32'
+
+    - name: 4.1.16 Ensure kernel module loading and unloading is collected | Set Rule Values (64 bit)
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_16"
+        ubuntu_cis_rule_expected_values:
+          - "{{ ubuntu_cis_4_1_16_64bit_expected_value }}"
+          - "{{ ubuntu_cis_4_1_16_64bit_expected_value }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_16_out }}"
+      when: ansible_architecture == 'x86_64' 
+  ignore_errors: true
+  when: ubuntu_cis_4_1_15 | bool  
+
+- name: 4.1.17
+  block:
+    - name: 4.1.17 Ensure the audit configuration is immutable
+      shell: grep "^\s*[^#]" /etc/audit/audit.rules | tail -1
+      register: ubuntu_cis_4_1_17_out
+
+    - name: 4.1.17 Ensure the audit configuration is immutable | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_4_1_17"
+        ubuntu_cis_rule_expected_values:
+          - "-e 2"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_4_1_17_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_4_1_17 | bool

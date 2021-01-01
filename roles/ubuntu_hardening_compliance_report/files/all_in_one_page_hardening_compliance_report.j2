@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*{
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+
+			body {
+				background: #353a40;
+			}
+
+			h1 {
+				font-family: sans-serif;
+				color: #fff;
+				text-align: center;
+			}
+
+			h2 {
+				font-family: sans-serif;
+				color: #fff;
+				text-align: center;
+			}
+			
+			table {
+				border-collapse: separate;
+				background: #fff;
+				margin: 0px auto 50px auto;
+			}
+
+			thead th {
+				font-family: sans-serif;
+				font-size: 16px;
+				font-weight: 400;
+				color: #fff;
+				text-align: left;
+				border-top: 1px solid #858d99;
+				background: #353a40
+			}
+
+			thead th.header {
+				font-weight: bold;
+			}
+
+			tbody tr td {
+				font-family: sans-serif;
+				font-weight: 400;
+				color: #000000;
+				font-size: 13px;
+				vertical-align: text-top;
+			}
+
+			td {
+				border: 1px solid #353a40;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>Red Hat 7 Hardening Compliance Report</h1>
+		<h2>Summary</h2>
+			<table>
+				<thead>
+					<tr>
+						<th class="header">Rule No.</th>
+						<th class="header">Compliant</th>
+						<th class="header">Non Compliant</th>
+						<th class="header">Risk Accepted</th>
+						<th class="header">Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if hostvars[inventory_hostname]['ubuntu_hardening_compliance_summary'] is defined %}
+					{% for summary_item in hostvars[inventory_hostname]['ubuntu_hardening_compliance_summary'] %}
+					{% if summary_item['baseline'] is defined %}
+					{% set baseline_key = summary_item['baseline'] %}
+					{% if hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'][baseline_key] is defined %}
+					<tr>
+						<td>{{ hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'][baseline_key]['section_number'] }} {{ hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'][baseline_key]['description'] }}</td>
+						<td>{{ summary_item['compliant'] }}</td>
+						<td>{{ summary_item['non_compliant'] }}</td>
+						<td>{{ summary_item['risk_accepted'] }}</td>
+						<td>{{ summary_item['total'] }}</td>
+					</tr>
+					{% endif %}
+					{% endif %}
+					{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+		<h2>Details</h2>
+                	{% for host in groups[group_name] %}
+			{% if hostvars[host]['ubuntu_hardening_compliance_baseline'] is defined and hostvars[host]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[host]['ubuntu_rules'] is defined %}
+			<table>
+				<thead>
+					<tr>
+						<th class="header">Hostname</th>
+						<th colspan=3>{{ host }}</th>
+					</tr>
+					<tr>
+						<th class="header">IP</th>
+						<th colspan=3>
+							{% if hostvars[host]['ansible_default_ipv4'] is defined and hostvars[host]['ansible_default_ipv4']['address'] is defined %}
+							{{ hostvars[host]['ansible_default_ipv4']['address'] }}
+							{% endif %}
+						</th>
+					</tr>
+					<tr>
+						<th class="header">Rule No.</th>
+						<th class="header">Status</th>
+						<th class="header">Expected Value</th>
+						<th class="header">Actual Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for baseline_key in hostvars[host]['ubuntu_hardening_compliance_baseline'] %}
+					{% set baseline_item = hostvars[host]['ubuntu_hardening_compliance_baseline_data'][baseline_key] %}
+                                        {% set ubuntu_rule_key = baseline_item['rule'] %}
+					{% if ubuntu_rule_key and hostvars[host]['ubuntu_rules'][ubuntu_rule_key] is defined %}
+					<tr>
+						<td>{{ baseline_item['section_number'] }} {{ baseline_item['description'] }}</td>
+						<td>{{ baseline_item['compliance'] }}</td>
+
+						<td>
+						{% if hostvars[host]['ubuntu_rules'][ubuntu_rule_key]['expected_values'] is defined %}
+						{% for expected_value in hostvars[host]['ubuntu_rules'][ubuntu_rule_key]['expected_values'] %}
+							- {{ expected_value }}<br/>
+						{% endfor %}
+						{% endif %}
+						</td>
+
+						<td>
+						{% if hostvars[host]['ubuntu_rules'][ubuntu_rule_key]['actual_values'] is defined %}
+						{% for actual_value in hostvars[host]['ubuntu_rules'][ubuntu_rule_key]['actual_values'] %}
+							- {{ actual_value }}<br/>
+						{% endfor %}
+						{% endif %}
+						</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+			{% endif %}
+			{% endfor %}
+		<h2>Risk Register</h2>
+			<table>
+				<thead>
+					<tr>
+						<th class="header">Hostname</th>
+						<th class="header">Rule No.</th>
+						<th class="header">Accepted Value</th>
+						<th class="header">Date Approved</th>
+						<th class="header">Approved By</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if hostvars[inventory_hostname]['ubuntu_risk_register'] is defined %}
+					{% for host_key in hostvars[inventory_hostname]['ubuntu_risk_register'] %}
+					{% for baseline_key in hostvars[inventory_hostname]['ubuntu_risk_register'][host_key] %}
+					{% set risk_register_item = hostvars[inventory_hostname]['ubuntu_risk_register'][host_key][baseline_key] %}
+					{% if hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'][baseline_key] is defined %}
+					{% set baseline_item = hostvars[inventory_hostname]['ubuntu_hardening_compliance_baseline_data'][baseline_key] %}
+					<tr>
+						<td>{{ host_key }}</td>
+						<td>{{ baseline_item['section_number'] }} {{ baseline_item['description'] }}</td>
+						<td>
+						{% if risk_register_item['accepted_values'] is defined %}
+						{% for accepted_value in risk_register_item['accepted_values'] %}
+							- {{ accepted_value }}<br/>
+						{% endfor %}
+						{% endif %}
+						</td>
+						<td>{{ risk_register_item['date_approved'] }}</td>
+						<td>{{ risk_register_item['approved_by'] }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+	</body>
+</html>

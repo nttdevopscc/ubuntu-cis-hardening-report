@@ -1,0 +1,92 @@
+---
+- name: 1.1.1.1
+  block:
+    - name: 1.1.1.1 Ensure mounting of cramfs filesystems is disabled
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s cramfs
+        - lsmod | grep cramfs | cat
+      register: ubuntu_cis_1_1_1_1_out
+
+    - name: 1.1.1.1 Ensure mounting of cramfs filesystems is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_1"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_1_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_1 | bool
+
+- name: 1.1.1.2
+  block:
+    - name: 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s freevxfs
+        - lsmod | grep freevxfs | cat
+      register: ubuntu_cis_1_1_1_2_out
+
+    - name: 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_2"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_2_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_2 | bool
+
+- name: 1.1.1.3
+  block:
+    - name: 1.1.1.3 Ensure mounting of jffs2 filesystems is disabled
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s jffs2
+        - lsmod | grep jffs2 | cat
+      register: ubuntu_cis_1_1_1_3_out
+
+    - name: 1.1.1.3 Ensure mounting of jffs2 filesystems is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_3"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_3_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_3 | bool
+
+- name: 1.1.1.4
+  block:
+    - name: 1.1.1.4 Ensure mounting of hfs filesystems is disabled
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s hfs
+        - lsmod | grep hfs | cat
+      register: ubuntu_cis_1_1_1_4_out
+
+    - name: 1.1.1.4 Ensure mounting of hfs filesystems is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_4"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_4_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_4 | bool
+
+- name: 1.1.1.5
+  block:
+    - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
+
+- name: 1.1.1.6
+  block:
+    - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled
+
+- name: 1.1.1.7
+  block:
+    - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited

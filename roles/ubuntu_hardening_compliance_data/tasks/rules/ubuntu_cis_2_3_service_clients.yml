@@ -1,0 +1,64 @@
+---
+- name: 2.3.1
+  block:
+    - name: 2.3.1 Ensure NIS Client is not installed
+      shell: rpm -q ypbind
+      register: ubuntu_cis_2_3_1_out
+
+    - name: 2.3.1 Ensure NIS Client is not installed | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_2_3_1"
+        ubuntu_cis_rule_expected_values:
+          - package ypbind is not installed
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_2_3_1_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_2_3_4 | bool
+
+# - name: 2.3.2
+#   block:
+#     - name: 2.3.2 Ensure rsh client is not installed
+
+# - name: 2.3.3
+#   block:
+#     - name: 2.3.3 Ensure talk client is not installed
+
+- name: 2.3.4
+  block:
+    - name: 2.3.4 Ensure telnet client is not installed
+      shell: rpm -q telnet
+      register: ubuntu_cis_2_3_4_out
+
+    - name: 2.3.4 Ensure telnet client is not installed | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_2_3_4"
+        ubuntu_cis_rule_expected_values:
+          - package telnet is not installed
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_2_3_4_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_2_3_4 | bool
+
+- name: 2.3.5
+  block:
+    - name: 2.3.5 Ensure LDAP client is not installed
+      shell: rpm -q openldap-clients
+      register: ubuntu_cis_2_3_5_out
+
+    - name: 2.3.5 Ensure LDAP client is not installed | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_2_3_5"
+        ubuntu_cis_rule_expected_values:
+          - package openldap-clients is not installed
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_2_3_5_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_2_3_5 | bool
+
+# - name: 2.3.6
+#   block:
+#     - name: 2.3.6 Ensure RPC is not installed
+
+# - name: 2.4
+#   block:
+#     - name: 2.4 Ensure nonessential services are removed or masked

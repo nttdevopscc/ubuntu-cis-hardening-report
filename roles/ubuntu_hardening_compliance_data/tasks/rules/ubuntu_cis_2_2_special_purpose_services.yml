@@ -1,0 +1,77 @@
+---
+- name: 2.2.2
+  block:
+    - name: Ensure X Window System is not installed
+#      shell: rpm -qa xorg-x11*
+      shell: for list in `rpm -qa xorg-x11*`; do echo ${list%-*-*}; done
+      register: ubuntu_cis_2_2_2_out
+
+    - name: 2.2.2 Ensure X Window System is not installed | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_2_2_2"
+        ubuntu_cis_rule_expected_values:
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_2_2_2_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_2_2_2 | bool
+
+# - name: 2.2.3
+#   block:
+#     - name: 2.2.3 Ensure Avahi Server is not installed
+
+# - name: 2.2.4
+#   block:
+#     - name: 2.2.4 Ensure CUPS is not installed
+
+# - name: 2.2.5
+#   block:
+#     - name: 2.2.5 Ensure DHCP Server is not installed
+
+# - name: 2.2.6
+#   block:
+#     - name: 2.2.6 Ensure LDAP Server is not installed
+
+# - name: 2.2.7
+#   block:
+#     - name: 2.2.7 Ensure NFS is not installed
+
+# - name: 2.2.8
+#   block:
+#     - name: 2.2.8 Ensure DNS Server is not installed
+
+# - name: 2.2.9
+#   block:
+#     - name: 2.2.9 Ensure FTP Server is not installed
+
+# - name: 2.2.10
+#   block:
+#     - name: 2.2.10 Ensure HTTP server is not installed
+
+# - name: 2.2.11
+#   block:
+#     - name: 2.2.11 Ensure IMAP and POP3 server are not installed
+
+# - name: 2.2.12
+#   block:
+#     - name: 2.2.12 Ensure Samba is not installed
+
+# - name: 2.2.13
+#   block:
+#     - name: 2.2.13 Ensure HTTP Proxy Server is not installed
+
+# - name: 2.2.14
+#   block:
+#     - name: 2.2.14 Ensure SNMP Server is not installed
+
+# - name: 2.2.15
+#   block:
+#     - name: 2.2.15 Ensure mail transfer agent is configured for local-only mode
+
+# - name: 2.2.16
+#   block:
+#     - name: 2.2.16 Ensure rsync service is not installed
+
+# - name: 2.2.17
+#   block:
+#     - name: 2.2.17 Ensure NIS Server is not installed
