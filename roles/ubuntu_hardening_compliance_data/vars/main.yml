@@ -231,7 +231,7 @@ ubuntu_cis_6_1_13: false
 ubuntu_cis_6_1_14: false
 ubuntu_cis_6_2_1: true
 ubuntu_cis_6_2_2: true
-ubuntu_cis_6_2_3: true
+ubuntu_cis_6_2_3: false
 ubuntu_cis_6_2_4: true
 ubuntu_cis_6_2_5: true
 ubuntu_cis_6_2_6: true
