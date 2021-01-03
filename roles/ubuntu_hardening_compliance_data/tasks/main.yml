@@ -3,8 +3,8 @@
   fail:
     msg: "Ensure that the managed node is Ubuntu 20.04"
   when:
-    - not ansible_os_family == "Ubuntu"
-    - not ansible_distribution_major_version == "20.04"
+    - not ansible_distribution == "Ubuntu"
+    - not ansible_distribution_major_version == "20"
 
 - name: Import all rules dictionaries
   include_vars:
