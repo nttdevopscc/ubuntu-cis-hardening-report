@@ -15,18 +15,21 @@
   loop:
     - rules/ubuntu_cis_1_1_1_disable_unused_filesystems.yml
     - rules/ubuntu_cis_1_1_filesystem_configuration.yml
-    - rules/ubuntu_cis_1_2_configure_software_updates.yml
-    - rules/ubuntu_cis_1_3_filesystem_integrity_checking.yml
-    - rules/ubuntu_cis_1_4_secure_boot_settings.yml
-    - rules/ubuntu_cis_1_5_additional_process_hardening.yml
-    - rules/ubuntu_cis_1_7_1_command_line_warning_banners.yml
-    - rules/ubuntu_cis_2_1_inetd_services.yml
+    # - rules/ubuntu_cis_1_2_configure_software_updates.yml
+    # - rules/ubuntu_cis_1_3_configure_sudo.yml
+    - rules/ubuntu_cis_1_4_filesystem_integrity_checking.yml
+    - rules/ubuntu_cis_1_5_secure_boot_settings.yml
+    - rules/ubuntu_cis_1_6_additional_process_hardening.yml
+    - rules/ubuntu_cis_1_7_mandatory_access_control.yml
+    - rules/ubuntu_cis_1_8_warning_banners.yml
+    # - rules/ubuntu_cis_2_1_inetd_services.yml
     - rules/ubuntu_cis_2_2_1_time_synchronization.yml
     - rules/ubuntu_cis_2_2_special_purpose_services.yml
     - rules/ubuntu_cis_2_3_service_clients.yml
-    - rules/ubuntu_cis_3_1_network_parameters_host_only.yml
-    - rules/ubuntu_cis_3_2_network_parameters_host_and_router.yml
-    - rules/ubuntu_cis_3_3_ipv6.yml
+    # - rules/ubuntu_cis_3_1_network_configuration.yml
+    - rules/ubuntu_cis_3_2_network_parameters_host_only.yml
+    - rules/ubuntu_cis_3_3_network_parameters_host_and_router.yml
+    - rules/ubuntu_cis_3_4_uncommon_network_protocols.yml
     - rules/ubuntu_cis_3_4_tcp_wrappers.yml
     - rules/ubuntu_cis_3_5_uncommon_network_protocols.yml
     - rules/ubuntu_cis_3_6_firewall_configuration.yml

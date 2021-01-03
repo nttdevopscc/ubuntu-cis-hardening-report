@@ -1,0 +1,16 @@
+---
+# - name: 1.7.1.1
+#   block:
+#     - name: 1.7.1.1 Ensure AppArmor is installed
+
+# - name: 1.7.1.2
+#   block:
+#     - name: 1.7.1.2 Ensure AppArmor is enabled in the bootloader configuration
+
+# - name: 1.7.1.3
+#   block:
+#     - name: 1.7.1.3 Ensure all AppArmor Profiles are in enforce or complain mode
+
+# - name: 1.7.1.4
+#   block:
+#     - name: 1.7.1.4 Ensure all AppArmor Profiles are enforcing
