@@ -29,14 +29,13 @@
     # - rules/ubuntu_cis_3_1_network_configuration.yml
     - rules/ubuntu_cis_3_2_network_parameters_host_only.yml
     - rules/ubuntu_cis_3_3_network_parameters_host_and_router.yml
-    - rules/ubuntu_cis_3_4_uncommon_network_protocols.yml
-    - rules/ubuntu_cis_3_4_tcp_wrappers.yml
-    - rules/ubuntu_cis_3_5_uncommon_network_protocols.yml
-    - rules/ubuntu_cis_3_6_firewall_configuration.yml
-    - rules/ubuntu_cis_4_1_1_configure_data_retention.yml
+    # - rules/ubuntu_cis_3_4_uncommon_network_protocols.yml
+    # - rules/ubuntu_cis_3_4_tcp_wrappers.yml
+    # - rules/ubuntu_cis_3_6_firewall_configuration.yml
+    # - rules/ubuntu_cis_4_1_1_configure_data_retention.yml
     - rules/ubuntu_cis_4_1_configure_system_accounting.yml
-    - rules/ubuntu_cis_4_2_configure_rsyslog.yml
-    - rules/ubuntu_cis_4_2_2_configure_syslog-ng.yml
+    # - rules/ubuntu_cis_4_2_configure_rsyslog.yml
+    # - rules/ubuntu_cis_4_2_1_configure_syslog-ng.yml
     - rules/ubuntu_cis_5_1_configure_cron.yml
     - rules/ubuntu_cis_5_2_ssh_server_configuration.yml
     - rules/ubuntu_cis_5_3_configure_pam.yml
