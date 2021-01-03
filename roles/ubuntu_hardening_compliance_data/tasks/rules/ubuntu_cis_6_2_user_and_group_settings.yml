@@ -33,22 +33,22 @@
   ignore_errors: true
   when: ubuntu_cis_6_2_2 | bool
 
-- name: 6.2.3
-  block:
-    - name: 6.2.3 Ensure root PATH Integrity
-      script: ubuntu_cis_6_2_3.sh
-      chdir: /home/ansible
-      register: ubuntu_cis_6_2_3_out
+# - name: 6.2.3
+#   block:
+#     - name: 6.2.3 Ensure root PATH Integrity
+#       script: ubuntu_cis_6_2_3.sh
+#       chdir: /home/ansible
+#       register: ubuntu_cis_6_2_3_out
 
-    - name: 6.2.3 Ensure root PATH Integrity | Set Rule Values
-      include_tasks: set_rule_values.yml
-      vars:
-        ubuntu_cis_rule_key: "cis_6_2_3"
-        ubuntu_cis_rule_expected_values:
-          - ""
-        ubuntu_cis_rule_output: "{{ ubuntu_cis_6_2_3_out }}"
-  ignore_errors: true
-  when: ubuntu_cis_6_2_3 | bool
+#     - name: 6.2.3 Ensure root PATH Integrity | Set Rule Values
+#       include_tasks: set_rule_values.yml
+#       vars:
+#         ubuntu_cis_rule_key: "cis_6_2_3"
+#         ubuntu_cis_rule_expected_values:
+#           - ""
+#         ubuntu_cis_rule_output: "{{ ubuntu_cis_6_2_3_out }}"
+#   ignore_errors: true
+#   when: ubuntu_cis_6_2_3 | bool
 
 # - name: 6.2.4
 #   block:

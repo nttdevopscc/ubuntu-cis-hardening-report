@@ -43,6 +43,6 @@
     - rules/ubuntu_cis_5_4_user_accounts_and_environment.yml
     - rules/ubuntu_cis_6_1_system_file_permissions.yml
     - rules/ubuntu_cis_6_2_user_and_group_settings.yml
-    - rules/ubuntu_keppel.yml
+    # - rules/ubuntu_keppel.yml
   loop_control:
     loop_var: ubuntu_rule_item
