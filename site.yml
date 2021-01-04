@@ -21,7 +21,7 @@
 
 - name: Generate Ubuntu hardening compliance report
   hosts: localhost
-  ansible_connection: local
+  connection: local
   gather_facts: true
   ignore_errors: true
   ignore_unreachable: true
