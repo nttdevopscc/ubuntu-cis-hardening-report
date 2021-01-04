@@ -18,14 +18,14 @@
   template:
     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
 #    dest: "/var/www/html/{{ ansible_host }}.html"
-    dest: "/var/www/html/{{ ansible_net_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
+    dest: "/var/www/html/{{ ansible_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
   when: groups[group_name] is defined
   delegate_to: localhost
 
 - name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
   template:
     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
-    dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_net_hostname }}.html"
+    dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_hostname }}.html"
   when: groups[group_name] is defined
   delegate_to: localhost
 
