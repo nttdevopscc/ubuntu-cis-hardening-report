@@ -3,7 +3,7 @@
   file:
     path: "{{ ubuntu_hardening_compliance_directory }}"
     state: directory
-  delegate_to: localhost
+  delegate_to: "{{ local_server }}"
   run_once: true
 
 - debug:
