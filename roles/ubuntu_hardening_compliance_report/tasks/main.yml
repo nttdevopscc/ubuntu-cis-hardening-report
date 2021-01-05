@@ -6,6 +6,10 @@
   delegate_to: localhost
   run_once: true
 
+- name: Test
+  set_fact:
+    svr: "{{ ansible_hostname }}"
+
 #- name: Generate hardening compliance report for Red Hat 7
 #  template:
 #    src: "./files/all_in_one_page_hardening_compliance_report.j2"
@@ -14,20 +18,20 @@
 #  delegate_to: localhost
 #  run_once: true
 
-- name: Generate hardening compliance report to /var/www/html
-  template:
-    src: "./files/separate_report_per_server_hardening_compliance_report.j2"
-#    dest: "/var/www/html/{{ ansible_host }}.html"
-    dest: "/var/www/html/{{ ansible_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
-#  when: groups[group_name] is defined
-  delegate_to: localhost
+# - name: Generate hardening compliance report to /var/www/html
+#   template:
+#     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
+# #    dest: "/var/www/html/{{ ansible_host }}.html"
+#     dest: "/var/www/html/{{ ansible_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
+# #  when: groups[group_name] is defined
+#   delegate_to: localhost
 
-- name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
-  template:
-    src: "./files/separate_report_per_server_hardening_compliance_report.j2"
-    dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_hostname }}.html"
-#  when: groups[group_name] is defined
-  delegate_to: localhost
+# - name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
+#   template:
+#     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
+#     dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_hostname }}.html"
+# #  when: groups[group_name] is defined
+#   delegate_to: localhost
 
 #- name: Generate CSV hardening compliance report to /home/awx/linux_hardening_compliance_summary_csv
 #  template:
