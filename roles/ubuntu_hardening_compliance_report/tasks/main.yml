@@ -3,7 +3,7 @@
   file:
     path: "{{ ubuntu_hardening_compliance_directory }}"
     state: directory
-  delegate_to: ansible-server
+  delegate_to: localhost
   run_once: true
 
 - debug:
