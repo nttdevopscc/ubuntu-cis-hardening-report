@@ -2,7 +2,8 @@
 - name: 1.4.1
   block:
     - name: 1.4.1 Ensure AIDE is installed
-      shell: rpm -q aide
+      shell: >-
+        dpkg -s aide | grep 'Status: install ok installed'
       register: ubuntu_cis_1_4_1_out      
 
     - name: 1.4.1 Ensure AIDE is installed | Set Rule Values
@@ -10,7 +11,7 @@
       vars:
         ubuntu_cis_rule_key: "cis_1_4_1"
         ubuntu_cis_rule_expected_values:
-          - "aide"
+          - "Status: install ok installed"
         ubuntu_cis_rule_output: "{{ ubuntu_cis_1_4_1_out }}"
   ignore_errors: true
   when: ubuntu_cis_1_4_1 | bool
@@ -18,7 +19,7 @@
 - name: 1.4.2
   block:
     - name: 1.4.2 Ensure filesystem integrity is regularly checked
-      shell: grep -rh aide /etc/cron.* /etc/crontab
+      shell: find /etc/cron.* /etc/crontab -name 'aide' -type f
       register: ubuntu_cis_1_4_2_out
 
     - name: 1.4.2 Ensure filesystem integrity is regularly checked | Set Rule Values
@@ -26,7 +27,7 @@
       vars:
         ubuntu_cis_rule_key: "cis_1_4_2"
         ubuntu_cis_rule_expected_values:
-          - "/usr/sbin/aide --check"
+          - "/etc/cron.daily/aide"
         ubuntu_cis_rule_output: "{{ ubuntu_cis_1_4_2_out }}"
   ignore_errors: true
   when: ubuntu_cis_1_4_2 | bool
