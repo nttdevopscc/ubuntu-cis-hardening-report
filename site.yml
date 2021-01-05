@@ -17,7 +17,8 @@
 #     - ubuntu_hardening_compliance_audit
 
 - name: Generate Ubuntu hardening compliance report
-  hosts: ubuntu_servers
+  hosts: localhost
+  connection: local
   ignore_errors: true
   ignore_unreachable: true
   roles:
