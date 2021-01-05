@@ -11,15 +11,15 @@ ubuntu_hardening_compliance_baseline:
  - baseline_1_1_1_1
  - baseline_1_1_1_2
  - baseline_1_1_1_3
- - baseline_1_1_1_4
- - baseline_1_1_1_5
- - baseline_1_1_1_6
- - baseline_1_1_1_7
+#  - baseline_1_1_1_4
+#  - baseline_1_1_1_5
+#  - baseline_1_1_1_6
+#  - baseline_1_1_1_7
 #  - baseline_1_1_2
  - baseline_1_1_3
  - baseline_1_1_4
  - baseline_1_1_5
- - baseline_1_1_6
+#  - baseline_1_1_6
  - baseline_1_1_7
  - baseline_1_1_8
  - baseline_1_1_9
