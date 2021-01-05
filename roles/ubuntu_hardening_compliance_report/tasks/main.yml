@@ -28,7 +28,7 @@
 
 - name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
   template:
-    src: "./files/separate_report_per_server_hardening_compliance_report.j2"
+    src: "./files/test.j2"
     dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_net_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html.html"
   when: groups[group_name] is defined
   delegate_to: "{{ local_server }}"
