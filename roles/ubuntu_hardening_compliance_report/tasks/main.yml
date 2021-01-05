@@ -8,7 +8,7 @@
 
 - name: Test
   set_fact:
-    svr: "{{ ansible_hostname }}"
+    svr: "{{ ansible_net_hostname }}"
 
 #- name: Generate hardening compliance report for Red Hat 7
 #  template:
