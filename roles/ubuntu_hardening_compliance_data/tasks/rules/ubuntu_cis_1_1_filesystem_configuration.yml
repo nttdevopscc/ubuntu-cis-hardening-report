@@ -71,41 +71,41 @@
   ignore_errors: true
   when: ubuntu_cis_1_1_7 | bool
 
-- name: 1.1.12
+- name: 1.1.8
   block:
-    - name: 1.1.12 Ensure nosuid option set on /dev/shm partition
+    - name: 1.1.8 Ensure nosuid option set on /dev/shm partition
       shell: mount | grep /dev/shm | grep nosuid | cat
-      register: ubuntu_cis_1_1_12_out
+      register: ubuntu_cis_1_1_8_out
 
-    - name: 1.1.12 Ensure nosuid option set on /dev/shm partition | Set Rule Values
+    - name: 1.1.8 Ensure nosuid option set on /dev/shm partition | Set Rule Values
       include_tasks: set_rule_values.yml
       vars:
-        ubuntu_cis_rule_key: "cis_1_1_12"
+        ubuntu_cis_rule_key: "cis_1_1_8"
         ubuntu_cis_rule_expected_values:
           - "nosuid"
-        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_12_out }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_8_out }}"
   ignore_errors: true
-  when: ubuntu_cis_1_1_12 | bool
+  when: ubuntu_cis_1_1_8 | bool
 
-- name: 1.1.13
+- name: 1.1.9
   block:
-    - name: 1.1.13 Ensure noexec option set on /dev/shm partition
+    - name: 1.1.9 Ensure noexec option set on /dev/shm partition
       shell: mount | grep /dev/shm | grep noexec | cat
-      register: ubuntu_cis_1_1_13_out
+      register: ubuntu_cis_1_1_9_out
 
-    - name: 1.1.13 Ensure noexec option set on /dev/shm partition | Set Rule Values
+    - name: 1.1.9 Ensure noexec option set on /dev/shm partition | Set Rule Values
       include_tasks: set_rule_values.yml
       vars:
-        ubuntu_cis_rule_key: "cis_1_1_13"
+        ubuntu_cis_rule_key: "cis_1_1_9"
         ubuntu_cis_rule_expected_values:
           - "noexec"
-        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_13_out }}"
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_9_out }}"
   ignore_errors: true
-  when: ubuntu_cis_1_1_13 | bool
+  when: ubuntu_cis_1_1_9 | bool
 
-# - name: 1.1.14
+# - name: 1.1.10
 #   block:
-#     - name: 1.1.14 Ensure seperate partitions exist for /var  
+#     - name: 1.1.10 Ensure seperate partitions exist for /var  
 
 # - name: 1.1.11
 #   block:

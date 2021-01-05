@@ -24,7 +24,7 @@
     - rules/ubuntu_cis_1_8_warning_banners.yml
     # - rules/ubuntu_cis_2_1_inetd_services.yml
     - rules/ubuntu_cis_2_2_1_time_synchronization.yml
-    - rules/ubuntu_cis_2_2_special_purpose_services.yml
+    # - rules/ubuntu_cis_2_2_special_purpose_services.yml
     - rules/ubuntu_cis_2_3_service_clients.yml
     # - rules/ubuntu_cis_3_1_network_configuration.yml
     - rules/ubuntu_cis_3_2_network_parameters_host_only.yml
