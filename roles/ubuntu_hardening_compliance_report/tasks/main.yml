@@ -6,10 +6,6 @@
   delegate_to: ansible-server
   run_once: true
 
-- name: Test
-  set_fact:
-    svr: "{{ ansible_net_hostname }}"
-
 # - name: Generate hardening compliance report for Red Hat 7
 #   template:
 #     src: "./files/all_in_one_page_hardening_compliance_report.j2"
@@ -27,12 +23,19 @@
 #   when: hostvars[inventory_hostname] is defined
 #   delegate_to: ansible-server
 
+# - name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
+#   template:
+#     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
+#     dest: "/home/awx/linux_hardening_compliance_report/ubuntu_{{ ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html.html"
+#   # when: groups[group_name] is defined
+#   when: hostvars[inventory_hostname] is defined
+#   delegate_to: ansible-server
+
 - name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
   template:
     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
-    dest: "/home/awx/linux_hardening_compliance_report/ubuntu_{{ ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html.html"
-  # when: groups[group_name] is defined
-  when: hostvars[inventory_hostname] is defined
+    dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_net_hostname }}.html"
+  when: groups[group_name] is defined
   delegate_to: ansible-server
 
 #- name: Generate CSV hardening compliance report to /home/awx/linux_hardening_compliance_summary_csv
