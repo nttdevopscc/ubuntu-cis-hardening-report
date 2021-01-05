@@ -1,20 +1,20 @@
 ---
-# - name: Get compliance data from Ubuntu managed nodes
-#   hosts: ubuntu_servers
-#   strategy: free
-#   ignore_errors: true
-#   ignore_unreachable: true
-#   become_user: true
-#   roles:
-#     - ubuntu_hardening_compliance_data
+- name: Get compliance data from Ubuntu managed nodes
+  hosts: ubuntu_servers
+  strategy: free
+  ignore_errors: true
+  ignore_unreachable: true
+  become_user: true
+  roles:
+    - ubuntu_hardening_compliance_data
 
-# - name: Check compliance of Ubuntu managed nodes
-#   hosts: ubuntu_servers
-#   ignore_errors: true
-#   ignore_unreachable: true
-#   become_user: true
-#   roles:
-#     - ubuntu_hardening_compliance_audit
+- name: Check compliance of Ubuntu managed nodes
+  hosts: ubuntu_servers
+  ignore_errors: true
+  ignore_unreachable: true
+  become_user: true
+  roles:
+    - ubuntu_hardening_compliance_audit
 
 - name: Generate Ubuntu hardening compliance report
   hosts: ubuntu_servers
