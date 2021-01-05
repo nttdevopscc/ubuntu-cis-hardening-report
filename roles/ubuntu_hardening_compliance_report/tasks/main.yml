@@ -11,12 +11,12 @@
     svr: "{{ ansible_net_hostname }}"
 
 - name: Generate hardening compliance report for Red Hat 7
- template:
-   src: "./files/all_in_one_page_hardening_compliance_report.j2"
-   dest: "{{ ubuntu_hardening_compliance_directory + '/ubuntu_hardening_compliance_report_' + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
- when: hostvars[inventory_hostname] is defined
- delegate_to: localhost
- run_once: true
+  template:
+    src: "./files/all_in_one_page_hardening_compliance_report.j2"
+    dest: "{{ ubuntu_hardening_compliance_directory + '/ubuntu_hardening_compliance_report_' + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
+  when: hostvars[inventory_hostname] is defined
+  delegate_to: localhost
+  run_once: true
 
 - name: Generate hardening compliance report to /var/www/html
   template:
