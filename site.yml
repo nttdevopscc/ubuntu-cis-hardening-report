@@ -19,7 +19,9 @@
     - ubuntu_hardening_compliance_audit
 
 - name: Generate Ubuntu hardening compliance report
-  hosts: ubuntu_servers
+#  hosts: ubuntu_servers
+  hosts: localhost
+  connection: local
   gather_facts: true
   ignore_errors: true
   ignore_unreachable: true
