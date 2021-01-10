@@ -479,12 +479,12 @@ ubuntu_hardening_compliance_baseline_data:
     rule: "cis_1_5_1"
     compliance: NC
     compliance_audit: compliance_audit/each_actual_value_is_equal_to_each_expected_value.yml
-  # baseline_1_5_2:
-  #   section_number: "1.5.2"
-  #   description: "Ensure permissions on bootloader config are configured"
-  #   rule: "cis_1_5_2"
-  #   compliance: NC
-  #   compliance_audit: 
+  baseline_1_5_2:
+    section_number: "1.5.2"
+    description: "Ensure permissions on bootloader config are configured"
+    rule: "cis_1_5_2"
+    compliance: NC
+    compliance_audit: compliance_audit/each_actual_value_is_equal_to_each_expected_value.yml
   baseline_1_5_3:
     section_number: "1.5.3"
     description: "Ensure authentication required for single user mode"
