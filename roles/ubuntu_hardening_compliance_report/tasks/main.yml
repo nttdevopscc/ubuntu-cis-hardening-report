@@ -3,41 +3,41 @@
   file:
     path: "{{ ubuntu_hardening_compliance_directory }}"
     state: directory
-  delegate_to: localhost
+  delegate_to: "{{ local_server }}"
   run_once: true
 
-- name: Test
-  set_fact:
-    svr: "{{ ansible_net_hostname }}"
+- debug:
+    msg: "{{ hostvars[inventory_hostname]['ansible_net_hostname'] }}"
 
-- name: Generate hardening compliance report for Red Hat 7
-  template:
-    src: "./files/all_in_one_page_hardening_compliance_report.j2"
-    dest: "{{ ubuntu_hardening_compliance_directory + '/ubuntu_hardening_compliance_report_' + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
-  when: hostvars[inventory_hostname] is defined
-  delegate_to: localhost
-  run_once: true
+# - name: Generate hardening compliance report for Red Hat 7
+#   template:
+#     src: "./files/all_in_one_page_hardening_compliance_report.j2"
+#     dest: "{{ ubuntu_hardening_compliance_directory + '/ubuntu_hardening_compliance_report_' + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
+#   when: hostvars[inventory_hostname] is defined
+#   delegate_to: ansible-server
+#   run_once: true
 
-- name: Generate hardening compliance report to /var/www/html
+# - name: Generate hardening compliance report to /var/www/html
+#   template:
+#     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
+# #    dest: "/var/www/html/{{ ansible_host }}.html"
+#     dest: "/var/www/html/{{ ansible_net_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
+#   # when: groups[group_name] is defined
+#   when: hostvars[inventory_hostname] is defined
+#   delegate_to: ansible-server
+
+- name: Generate hardening compliance report to /home/ansible/linux_hardening_compliance_report
   template:
     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
-#    dest: "/var/www/html/{{ ansible_host }}.html"
-    dest: "/var/www/html/{{ ansible_net_hostname + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html"
+    dest: "{{ ubuntu_hardening_compliance_directory + '/' + ansible_net_hostname + '_' + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html.html"
   when: groups[group_name] is defined
-  delegate_to: localhost
-
-- name: Generate hardening compliance report to /home/awx/linux_hardening_compliance_report
-  template:
-    src: "./files/separate_report_per_server_hardening_compliance_report.j2"
-    dest: "/home/awx/linux_hardening_compliance_report/{{ ansible_net_hostname }}.html"
-  when: groups[group_name] is defined
-  delegate_to: localhost
+  delegate_to: "{{ local_server }}"
 
 #- name: Generate CSV hardening compliance report to /home/awx/linux_hardening_compliance_summary_csv
 #  template:
 #    src: "./files/generate_csv.j2"
 #    dest: "/home/awx/linux_hardening_compliance_summary_csv/ubuntu_hardening_compliance_summary.csv"
 #  when: groups[group_name] is defined
-#  delegate_to: localhost
+#  delegate_to: ansible-server
 #  run_once: true
 

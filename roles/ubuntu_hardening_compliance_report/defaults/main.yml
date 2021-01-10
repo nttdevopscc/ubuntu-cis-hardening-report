@@ -1,7 +1,7 @@
 ---
 # Avoid modifying this file, and overwrite values in /vars instead
 
-ubuntu_hardening_compliance_directory: /home/awx/linux_hardening_compliance_report
+ubuntu_hardening_compliance_directory: /home/ansible/linux_hardening_compliance_report
 
 # Inventory #
 #############

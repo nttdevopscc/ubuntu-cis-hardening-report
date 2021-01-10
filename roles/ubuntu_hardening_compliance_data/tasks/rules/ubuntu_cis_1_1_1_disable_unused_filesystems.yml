@@ -79,14 +79,62 @@
   ignore_errors: true
   when: ubuntu_cis_1_1_1_4 | bool
 
-# - name: 1.1.1.5
-#   block:
-#     - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
+- name: 1.1.1.5
+  block:
+    - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s hfsplus
+        - lsmod | grep hfsplus | cat
+      register: ubuntu_cis_1_1_1_5_out
 
-# - name: 1.1.1.6
-#   block:
-#     - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled
+    - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_5"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_5_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_5 | bool
 
-# - name: 1.1.1.7
-#   block:
-#     - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited
+- name: 1.1.1.6
+  block:
+    - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s udf
+        - lsmod | grep udf | cat
+      register: ubuntu_cis_1_1_1_6_out
+
+    - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_6"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_6_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_6 | bool
+
+- name: 1.1.1.7
+  block:
+    - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited
+      shell: "{{ item }}"
+      loop:
+        - modprobe -n -v -s vfat
+        - lsmod | grep vfat | cat
+      register: ubuntu_cis_1_1_1_7_out
+
+    - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited | Set Rule Values
+      include_tasks: set_rule_values.yml
+      vars:
+        ubuntu_cis_rule_key: "cis_1_1_1_7"
+        ubuntu_cis_rule_expected_values:
+          - "install /bin/true"
+          - ""
+        ubuntu_cis_rule_output: "{{ ubuntu_cis_1_1_1_7_out }}"
+  ignore_errors: true
+  when: ubuntu_cis_1_1_1_7 | bool
