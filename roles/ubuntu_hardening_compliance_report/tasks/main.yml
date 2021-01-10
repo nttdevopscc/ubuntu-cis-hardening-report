@@ -31,7 +31,7 @@
     src: "./files/separate_report_per_server_hardening_compliance_report.j2"
     dest: "{{ ubuntu_hardening_compliance_directory + '/' + ansible_net_hostname + '_' + ansible_date_time['date'] + '_' + (ansible_date_time['time'] | replace(':','')) }}.html.html"
   when: groups[group_name] is defined
-  delegate_to: localhost
+  delegate_to: "{{ local_server }}"
 
 #- name: Generate CSV hardening compliance report to /home/awx/linux_hardening_compliance_summary_csv
 #  template:
