@@ -34,7 +34,8 @@
 - name: 1.5.3
   block:
     - name: 1.5.3 Ensure authentication required for single user mode
-      shell: "grep ^root:[*\!]: /etc/shadow"
+      shell: >-
+        grep ^root:[*\!]: /etc/shadow
       register: ubuntu_cis_1_5_3_out
 
     - name: 1.5.3 Ensure authentication required for single user mode | Set Rule Values

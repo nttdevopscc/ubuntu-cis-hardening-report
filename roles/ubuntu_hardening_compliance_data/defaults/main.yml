@@ -200,7 +200,7 @@ ubuntu_cis_5_2_5: true
 ubuntu_cis_5_2_6: true
 ubuntu_cis_5_2_7: true
 ubuntu_cis_5_2_8: true
-ubuntu_cis_5_2_9: true
+ubuntu_cis_5_2_9: false
 ubuntu_cis_5_2_10: true
 ubuntu_cis_5_2_11: true
 ubuntu_cis_5_2_12: false
