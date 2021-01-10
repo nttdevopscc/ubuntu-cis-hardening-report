@@ -4,7 +4,7 @@
   strategy: free
   ignore_errors: true
   ignore_unreachable: true
-  become: true
+  become: yes
   roles:
     - ubuntu_hardening_compliance_data
 
@@ -12,7 +12,7 @@
   hosts: ubuntu_servers
   ignore_errors: true
   ignore_unreachable: true
-  become: true
+  become: yes
   roles:
     - ubuntu_hardening_compliance_audit
 
@@ -20,6 +20,5 @@
   hosts: ubuntu_servers
   ignore_errors: true
   ignore_unreachable: true
-  become: true
   roles:
     - ubuntu_hardening_compliance_report
