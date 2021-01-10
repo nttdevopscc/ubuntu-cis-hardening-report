@@ -68,7 +68,7 @@ ubuntu_hardening_compliance_baseline:
 #  - baseline_2_1_2
 #  - baseline_2_2_1_1
 #  - baseline_2_2_1_2
- - baseline_2_2_1_3
+#  - baseline_2_2_1_3
 #  - baseline_2_2_1_4
 #  - baseline_2_2_2
 #  - baseline_2_2_3
@@ -90,15 +90,15 @@ ubuntu_hardening_compliance_baseline:
  - baseline_2_3_2
 #  - baseline_2_3_3
 #  - baseline_2_3_4
- - baseline_2_3_5
+#  - baseline_2_3_5
 #  - baseline_2_3_6
 #  - baseline_2_4
 #  - baseline_3_1_1
 #  - baseline_3_1_2
- - baseline_3_2_1
- - baseline_3_2_2
- - baseline_3_3_1
- - baseline_3_3_2
+#  - baseline_3_2_1
+#  - baseline_3_2_2
+#  - baseline_3_3_1
+#  - baseline_3_3_2
  - baseline_3_3_3
  - baseline_3_3_4
  - baseline_3_3_5
@@ -145,21 +145,21 @@ ubuntu_hardening_compliance_baseline:
 #  - baseline_4_1_2_1
 #  - baseline_4_1_2_2
 #  - baseline_4_1_2_3
- - baseline_4_1_3
- - baseline_4_1_4
- - baseline_4_1_5
- - baseline_4_1_6
- - baseline_4_1_7
- - baseline_4_1_8
- - baseline_4_1_9
- - baseline_4_1_10
- - baseline_4_1_11
- - baseline_4_1_12
- - baseline_4_1_13
- - baseline_4_1_14
+#  - baseline_4_1_3
+#  - baseline_4_1_4
+#  - baseline_4_1_5
+#  - baseline_4_1_6
+#  - baseline_4_1_7
+#  - baseline_4_1_8
+#  - baseline_4_1_9
+#  - baseline_4_1_10
+#  - baseline_4_1_11
+#  - baseline_4_1_12
+#  - baseline_4_1_13
+#  - baseline_4_1_14
 #  - baseline_4_1_15
- - baseline_4_1_16
- - baseline_4_1_17
+#  - baseline_4_1_16
+#  - baseline_4_1_17
 #  - baseline_4_2_1_1
 #  - baseline_4_2_1_2
 #  - baseline_4_2_1_3
@@ -203,7 +203,7 @@ ubuntu_hardening_compliance_baseline:
 #  - baseline_5_2_20
 #  - baseline_5_2_21
 #  - baseline_5_2_22
- - baseline_5_3_1
+#  - baseline_5_3_1
  - baseline_5_3_2
  - baseline_5_3_3
  - baseline_5_3_4
@@ -218,7 +218,7 @@ ubuntu_hardening_compliance_baseline:
 #  - baseline_5_4_5
 #  - baseline_5_5
  - baseline_5_6
- - baseline_6_1_1
+#  - baseline_6_1_1
  - baseline_6_1_2
  - baseline_6_1_3
  - baseline_6_1_4
