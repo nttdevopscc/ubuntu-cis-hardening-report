@@ -91,7 +91,7 @@
     </div>
 
     <div class="info">
-      {% set host = hostvars[inventory_hostname]['ansible_host'] %}
+      {% set host = hostvars[inventory_hostname]['ansible_net_hostname'] %}
       {% if hostvars[host]['ubuntu_hardening_compliance_baseline'] is defined and hostvars[host]['ubuntu_hardening_compliance_baseline_data'] is defined and hostvars[host]['ubuntu_rules'] is defined %}
 
       <div class="info__title">
