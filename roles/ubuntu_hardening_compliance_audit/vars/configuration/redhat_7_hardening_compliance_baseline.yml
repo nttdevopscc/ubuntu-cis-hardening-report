@@ -51,7 +51,7 @@ ubuntu_hardening_compliance_baseline:
 #  - baseline_1_6_1
  - baseline_1_6_2
 #  - baseline_1_6_3
- - baseline_1_6_4
+#  - baseline_1_6_4
 #  - baseline_1_7_1_1
 #  - baseline_1_7_1_2
 #  - baseline_1_7_1_3
